@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "docusaurus": "^1.14.7",
-    "yarn": "^1.22.22"
-  },
-  "scripts": {
-    "build": "webpack"
-  }
-}
