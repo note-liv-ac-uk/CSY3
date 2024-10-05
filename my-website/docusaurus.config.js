@@ -1,12 +1,12 @@
 module.exports = {
   title: 'My Site',
   tagline: 'The tagline of my site',
-  url: 'https://ikuokuo.github.io',
-  baseUrl: '/start-docusaurus2/',
+  url: 'https://note-liv-ac-uk.github.io',
+  baseUrl: '/CSY3/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'ikuokuo',
-  projectName: 'start-docusaurus2',
+  organizationName: 'note-liv-ac-uk',
+  projectName: 'CSY3',
   themeConfig: {
     navbar: {
       title: 'My Site',
