@@ -1,8 +1,5 @@
 name: Deploy to GitHub Pages
 
-defaults:
-  run:
-    working-directory: ./my-website
 
 on:
   push:
@@ -21,7 +18,6 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          cache-dependency-path: my-website/package-lock.json
           node-version: 18
           cache: yarn
 
