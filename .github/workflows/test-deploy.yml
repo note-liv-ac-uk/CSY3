@@ -1,5 +1,9 @@
 name: Test deployment
 
+defaults:
+  run:
+    working-directory: ./my-website
+    
 on:
   pull_request:
     branches:
