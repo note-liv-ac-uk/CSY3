@@ -6,14 +6,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 (module.exports = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  url: 'https://note-liv-ac-uk.github.io/',
+  url: 'https://note-liv-ac-uk.github.io',
   baseUrl: '/CSY3/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'note-liv-ac-uk', // Usually your GitHub org/user name.
   projectName: 'CSY3', // Usually your repo name.
-
+  deploymentBranch:'main',
   presets: [
     [
       '@docusaurus/preset-classic',
