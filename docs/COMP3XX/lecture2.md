@@ -1,4 +1,4 @@
-# Lecture 2  
+# <p align="center">Lecture 2</p>  
 <p align="center"><font size="4">Hongye Qian</font></p>  
 
 ## Part1 Artificial Neural Networks
@@ -36,7 +36,7 @@
    -   The neurotransmitter is released when a ***spike*** arrives from the presynaptic neuron.
    -    Transmitter crosses the synaptic cleft and binds to ***receptors*** on the ***dendritic spine***.
    -    There is ***no physiological continuity from neuron to neuron***.
-   -   ==When an impulse (perturbation) reaches a synapse, it does not necessarily stimulate the following neuron.==
+   -   ***When an impulse (perturbation) reaches a synapse, it does not necessarily stimulate the following neuron.***
    -   two ways of  Trans-synaptic stimulation:
        1. ***temporal summation***:either a repetition of impulses in time at the same synapse. 这是指在相同的突触处，连续多次的神经冲动重复发生，从而累积到达足够的激活水平，使得神经元产生响应。
        2. ***Spatial Summation***: the simultaneous arrival of impulses at a sufficient number of adjacent synapses. 这是指几个相邻的突触几乎同时收到冲动，合力使得某区域的激活密度足够高，从而引发神经元的活动。
