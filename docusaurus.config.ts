@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'The University of Liverpool Computer Science Notes',
+  tagline: 'Founded by SYH, SJY, QHY',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -129,7 +129,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} NOTE.LIV.AC.UK. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
