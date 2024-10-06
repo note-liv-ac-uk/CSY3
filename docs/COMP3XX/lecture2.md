@@ -1,10 +1,10 @@
-# <p align="center">Lecture 2</p>  
-<p align="center"><font size="4">Hongye Qian</font></p>  
+# Lecture 2 
+<font size="4">Hongye Qian</font>  
 
 ## Part1 Artificial Neural Networks
 - ANNs are based on **neuroscience ideas** and represent a form of computing technology.  
 ### Topic1 Historical/Biological Introduction
-#### 1. Neurons & Information Propagation
+#### 1. NeurAons & Information Propagation
 - Overview: Nerve fibers. Trains of Spikes (see lecture2, slide10-11)
 - Neurons propagate information via **action potentials** or **spikes**, which are electrical impulses that travel down nerve fibers.
 
