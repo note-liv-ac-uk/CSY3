@@ -18,14 +18,14 @@ const config: Config = {
   organizationName: 'note-liv-ac-uk', // Usually your GitHub org/user name.
   projectName: 'CSY3', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'zh-Hans',
+    defaultLocale: 'en',
     locales: ['en', 'zh-Hans'],
   },
 
