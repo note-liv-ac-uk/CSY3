@@ -1,4 +1,4 @@
-# Lecture3
+# Lecture 3
 <font size="4">Hongye Qian</font> 
 
 ### Topic2 A basic abstract model for a biological neuron
@@ -16,7 +16,7 @@
 - Each input i transmits a real value $a_i$.
    **输入信号**：每个输入𝑖传输一个实数值$a_i$。
 - Each connection is assigned with the weight $w_{ji}$.
-   **输入总和与阈值比较**：所有输入信号与相应权重的乘积之和 \( S_j = \sum_i w_{ji} a_i \)（\( i \) 表示输入序号）进行比较。如果 \( S_j \) 大于阈值，输出 \( x_j \) 为 1；否则为 0。
+   **输入总和与阈值比较**：所有输入信号与相应权重的乘积之和 \( $S_j = \sum_i w_{ji} a_i$ \)（\( $i$ \) 表示输入序号）进行比较。如果 \( $S_j$ \) 大于阈值，输出 \( $x_j$ \) 为 $1$；否则为 $0$。
 
 ***偏置量***：在神经网络中，偏置量（bias）是一个非常重要的概念。它作为一个可调整的参数，添加到输入的加权和中去影响神经元的激活状态。具体来说，偏置量是一个独立的输入，通常与权重一起在神经网络的训练过程中进行优化，以帮助模型更好地拟合数据。它可以用来调整激活阈值、避免对称性和模型退化等问题。
 
