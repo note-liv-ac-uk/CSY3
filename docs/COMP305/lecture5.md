@@ -1,4 +1,4 @@
-# Lecture5
+# Lecture 5
 <font size="4">Hongye Qian</font> 
 
 #### 1. MP Neuron Computation Algorithm
