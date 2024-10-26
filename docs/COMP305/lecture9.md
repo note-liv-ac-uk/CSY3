@@ -39,7 +39,7 @@ $\Delta w_1^1 = 1 \times 1 \times 1 = 1, \quad w_1^2 = w_1^1 + \Delta w_1^1 = 2 
 $
 注意权重的变化。 Please note the changes of weights.
 - Round 2: $t=2$,这时候注意一下输入的四个$a_i^2$是$1, 0, 1, 0$,这个输入时随机的，不是固定不变的，ppt上在t=2的时候的输入就是1, 0, 1, 0
-  ![alt text](image.png)
+![94c5299932ded228fb3d3932581929c.png](https://s2.loli.net/2024/10/26/RkiCeMmXwaY5rAp.png)
   1. $S^2 = \sum_{i=1}^{4} w_i^2 a_i^2 \\
 = w_1^2 \times a_1^2 + w_2^2 \times a_2^2 + w_3^2 \times a_3^2 + w_4^2 \times a_4^2 \\
 = 3 \times 1 + 1 \times 1 + 2 \times 0 + 1 \times 0 = 4 \geq \theta$ so the $X^3=1$
