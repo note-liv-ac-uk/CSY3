@@ -1,4 +1,4 @@
-# Lecture 10
+# Lecture 11
 <font size="4">Hongye Qian</font> 
 ### Topic 4 Normalized Hebb’s Rule (Oja’s Rule)
 #### 1. Hebb's rule vs Normalized Hebb’s Rule
