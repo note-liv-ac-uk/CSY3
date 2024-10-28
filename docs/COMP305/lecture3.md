@@ -1,4 +1,4 @@
-# Lecture 3
+# Lecture 03
 <font size="4">Hongye Qian</font> 
 
 ### Topic2 A basic abstract model for a biological neuron

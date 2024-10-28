@@ -1,4 +1,4 @@
-# Lecture 7
+# Lecture 07
 <font size="4">Hongye Qian</font> 
 
 ### Topic 2 The McCulloch-Pitts Neuron (1943)

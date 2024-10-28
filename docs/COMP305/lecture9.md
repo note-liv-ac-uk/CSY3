@@ -1,4 +1,4 @@
-# Lecture 9
+# Lecture 09
 <font size="4">Hongye Qian</font> 
 
 ### Topic 3 Hebb’s Rules
