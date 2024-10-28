@@ -1,4 +1,4 @@
-# Lecture 2 
+# Lecture 02 
 <font size="4">Hongye Qian</font>  
 
 ## Part1 Artificial Neural Networks
