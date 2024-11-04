@@ -196,7 +196,8 @@ $$
   $$
 
 #### 3. Bimatrix games
-- 回顾一下，一个有限的、非合作性策略博弈 \( \Gamma = \langle N, (S_i)_{i \in N}, (u_i)_{i \in N} \rangle \) 包含以下组成部分：
+- 回顾一下，一个有限的、非合作性策略博弈 $\Gamma = \langle N, (S_i)_{i \in N}, (u_i)_{i \in N} \rangle$
+包含以下组成部分：
   1. 一个有限的玩家集合 \( N \)，
   2. 每个玩家 \( i \in N \) 的纯策略（pure strategies）集合 \( S_i \)，其中 \( S_i \) 是非空有限集，
   3. 每个玩家 \( i \in N \) 的收益函数（payoff function）\( u_i : \times_{i \in N} S_i \rightarrow \mathbb{R} \)，将每种策略组合（每个玩家选择一种策略）映射到一个实数。
