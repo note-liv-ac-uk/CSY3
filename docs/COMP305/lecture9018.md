@@ -125,13 +125,8 @@ where the error of output neurons is propagated back to derive the weight adjust
 - The backpropagation 𝑤,𝑤 ,⋯,𝑤 ,𝑎 algorithm looks for the minimum of the error function 𝐸 in the space of weights of connections 𝑤 using the method of gradient descent.
 - The gradient of the multi-variable function $E$ is defined as:
 
-$$
-\nabla E = \left(
-\frac{\partial E}{\partial w_{11}^1}, \cdots, \frac{\partial E}{\partial w_{n_1 n_0}^1}, 
-\frac{\partial E}{\partial w_{11}^2}, \cdots, \frac{\partial E}{\partial w_{n_2 n_1}^2}, 
-\cdots, \frac{\partial E}{\partial w_{11}^l}, \cdots, \frac{\partial E}{\partial w_{n_l n_{l-1}}^l}
-\right)
-$$
+$$ \nabla E = \left( \frac{\partial E}{\partial w_{11}^1}, \cdots, \frac{\partial E}{\partial w_{n_1 n_0}^1}, \frac{\partial E}{\partial w_{11}^2}, \cdots, \frac{\partial E}{\partial w_{n_2 n_1}^2}, \cdots, \frac{\partial E}{\partial w_{11}^l}, \cdots, \frac{\partial E}{\partial w_{n_l n_{l-1}}^l} \right) $$
+
 $\frac{\partial E}{\partial w_{ji}^h}$ 表示误差函数 $E$ 对权重 $w_{ji}^h$ 的偏导数。这是 $E$ 相对于第 $h$ 层中第 $j$ 个神经元和前一层（第 $h-1$ 层）中第 $i$ 个神经元之间连接权重的偏导数。
 -  Vector ∇𝐸 is called gradient of the error function 𝐸, and it points in the direction along which 𝐸 increases most rapidly.
 -   **We would like to go in the opposite direction to most rapidly minimize 𝐸.**
