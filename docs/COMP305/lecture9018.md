@@ -167,7 +167,8 @@ if the value of the activation function itself is known for that value of $S$. �
 - If all activation functions $f(S)$ in the network are differentiable, then we can use the **chain rule** to calculate the partial derivative of the error function $E$ with respect to the weight of a specific connection.
 
 ### Chain rule (replenish)
-https://baike.baidu.com/item/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99/3314017
+[链式法则](https://baike.baidu.com/item/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99/3314017)
+
 
 
 
