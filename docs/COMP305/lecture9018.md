@@ -132,9 +132,7 @@ $\frac{\partial E}{\partial w_{ji}^h}$ 表示误差函数 $E$ 对权重 $w_{ji}^
 -   **We would like to go in the opposite direction to most rapidly minimize 𝐸.**
 - Therefore, during the **iterative process of gradient descent**, each weight of connection, including the hidden ones, is updated:
 
-$$
-w_{ji}^h = w_{ji}^h + \Delta w_{ji}^h, \quad \text{where } \Delta w_{ji}^h = -C \frac{\partial E}{\partial w_{ji}^h}
-$$
+$$w_{ji}^h = w_{ji}^h + \Delta w_{ji}^h, \quad \text{where } \Delta w_{ji}^h = -C \frac{\partial E}{\partial w_{ji}^h}$$
 
 Here $C$ represents the learning rate as before. 
 -  Since calculus-based methods of minimization depends on the taking of derivatives, their application to network training requires the error function 𝑬 be a differentiable function (almost everywhere). 函数至少在绝大多数地方要求是可微的
@@ -159,14 +157,10 @@ $$
 - See some examples on lec.18 P38
 ### Learning of a Multilayer Perceptron
 *Generic sigmoidal activation function:*
-$$
-f(S) = \frac{\alpha}{1 + e^{-\beta S + \gamma}} + \lambda
-$$
+$$f(S) = \frac{\alpha}{1 + e^{-\beta S + \gamma}} + \lambda$$
 
 *Its derivative:*
-$$
-f'(S) = \frac{df}{dS} = \frac{\beta}{\alpha} \cdot (f(S) + \lambda)(\alpha + \lambda - f(S))
-$$
+$$f'(S) = \frac{df}{dS} = \frac{\beta}{\alpha} \cdot (f(S) + \lambda)(\alpha + \lambda - f(S))$$
 
 *Explanation:*
 It is straightforward to compute the derivative at any particular value of variable $S$ without actual differentiation,  
