@@ -101,17 +101,13 @@ $$
 
 单调性
 如果学习率 $\gamma$ 选择得当，每次更新后目标函数的值单调减少：
-$$
-F(x_0) \geq F(x_1) \geq F(x_2) \geq \cdots
-$$
+$$F(x_0) \geq F(x_1) \geq F(x_2) \geq \cdots$$
 
 ---
 
 收敛性
 理想情况下，迭代点序列 $\{x_n\}$ 将会收敛到目标函数的局部最小值 $x^*$，满足：
-$$
-\nabla F(x^*) = 0
-$$
+$$\nabla F(x^*) = 0$$
 ***
 ### Learning of a Multilayer Perceptron
 - Gradient descent method addresses the issue of how to update weights.
