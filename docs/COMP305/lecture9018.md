@@ -139,9 +139,7 @@ Here $C$ represents the learning rate as before.
 ### Generic sigmoidal activation function
 The sigmoidal function is defined as:
 
-$$
-f(S) = \frac{\alpha}{1 + e^{-\beta S + \gamma}} + \lambda
-$$
+$$f(S) = \frac{\alpha}{1 + e^{-\beta S + \gamma}} + \lambda$$
 - It has four parameters: $\alpha$, $\beta$, $\gamma$, $\lambda$.
 - It is monotonically increasing. 它是**单调递增**的。
 - It has the shape of the s-curve, which is commonly used for learning processes. 其形状为 S 曲线，常用于学习过程的建模。
