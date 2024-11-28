@@ -7,33 +7,23 @@
 ![5cbe1ddf049430aa8aea470ef1ea69a.png](https://s2.loli.net/2024/11/28/Xao7lLfQGqz9Mvx.png)
 The output error of a multilayer perceptron for the $k$-th input pattern is **a half of the squared error**:  $E^k$ 表示多层感知器对第 $k$ 个输入样本的输出误差。误差采用**平方误差的一半**形式。
 
-$$
-E^k = \frac{1}{2} \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{j=1}^m \left(t_j^k - X_j^k\right)^2
-$$
+$$E^k = \frac{1}{2} \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{j=1}^m \left(t_j^k - X_j^k\right)^2$$
 
 The performance of multilayer perceptron= $\frac{1}{2}$the total squared error
-$$
-E = \sum_{k=1}^r E^k = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(t_j^k - X_j^k\right)^2
-$$
+$$E = \sum_{k=1}^r E^k = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(t_j^k - X_j^k\right)^2$$
 - During the training stage, the input value $a$ to the network are the input vectors of the training set, which are **constant parameters** for the process.
 
 - Therefore, the **MLP error function $E$** is a function of the weights of connections only:
 
-$$
-E = \sum_{k=1}^r E^k = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(t_j^k - F_j(w^l, w^{l-1}, \dots, w^1, a^k)\right)^2 = E(W)
-$$
+$$E = \sum_{k=1}^r E^k = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(e_j^k\right)^2 = \frac{1}{2} \sum_{k=1}^r \sum_{j=1}^m \left(t_j^k - F_j(w^l, w^{l-1}, \dots, w^1, a^k)\right)^2 = E(W)$$
 - 因为error仅仅受输入和权重影响，输入被视作是常数，所以它可以被视作为权重的一个函数。
 - <u>The better the MLP performs, the smaller the MLP error function $E$is.</u>
-- Thus MLP learning can be considered as the optimization problem: $
-\min_W E(W)
-$, 可以用梯度下降来实现（想必大家都很熟悉这个东西），比如SGD
+- Thus MLP learning can be considered as the optimization problem: $\min_W E(W)$, 可以用梯度下降来实现（想必大家都很熟悉这个东西），比如SGD
 ### Gradient Decent
 ![0e4a61cf3ee82306b2e5ec4ce9ae4ed.png](https://s2.loli.net/2024/11/29/FXcJePuO4wxY3lv.png)
 Gradient descent is based on the observation that if the multi-variable function $F(x)$ is defined and differentiable in a neighborhood of a point $a$, then $F(x)$ decreases fastest if one goes from $a$ in the direction of the negative gradient of $F$ at $a$, $-\nabla F(a)$. It follows that, if
 
-$$
-a' = a + \gamma(-\nabla F(a)) = a - \gamma \nabla F(a)
-$$
+$$a' = a + \gamma(-\nabla F(a)) = a - \gamma \nabla F(a)$$
 
 For a $\gamma \in \mathbb{R}^+$ small enough, then $F(a) \geq F(a')$
 ***
@@ -44,19 +34,15 @@ For a $\gamma \in \mathbb{R}^+$ small enough, then $F(a) \geq F(a')$
 
 - 更新公式：
 梯度下降法通过以下公式更新变量：
-$$
-a' = a + \gamma(-\nabla F(a)) = a - \gamma \nabla F(a)
-$$
+$$a' = a + \gamma(-\nabla F(a)) = a - \gamma \nabla F(a)$$
 其中：
 - $a$：当前点。
 - $\nabla F(a)$：函数 $F(x)$ 在 $a$ 点的梯度。
 - $\gamma$：学习率（一个正的小值，控制更新步长大小）。
 
-    条件：
+条件：
 - 当 $\gamma$ 足够小时，新点 $a'$ 的函数值是小于或等于当前点的函数值：
-$$
-F(a) \geq F(a')
-$$
+$$F(a) \geq F(a')$$
 
 这表示每次更新后，函数值都朝着最小值方向变化。
 ***
@@ -66,9 +52,7 @@ $$
 
 Gradient descent is based on the observation that if the multi-variable function $F(x)$ is defined and differentiable in a neighborhood of a point $a$, then $F(x)$ decreases fastest if one goes from $a$ in the direction of the negative gradient of $F$ at $a$, $-\nabla F(a)$. It follows that, if
 
-$$
-a_{n+1} = a_n - \gamma \nabla F(a_n)
-$$
+$$a_{n+1} = a_n - \gamma \nabla F(a_n)$$
 
 For a $\gamma \in \mathbb{R}^+$ small enough, then $F(a_n) \geq F(a_{n+1})$.
 
@@ -76,22 +60,14 @@ For a $\gamma \in \mathbb{R}^+$ small enough, then $F(a_n) \geq F(a_{n+1})$.
 
 With this observation, one starts with an initial guess $x_0$ for a local minimum of $F$, and considers the sequence $x_0, x_1, x_2, \cdots$ such that
 
-$$
-x_{n+1} = x_n - \gamma \nabla F(x_n).
-$$
+$$x_{n+1} = x_n - \gamma \nabla F(x_n).$$
 
 We can have monotonic sequence:
-$$
-F(x_0) \geq F(x_1) \geq F(x_2) \geq \cdots
-$$
+$$F(x_0) \geq F(x_1) \geq F(x_2) \geq \cdots$$
 
 So hopefully, the sequence $\{x_n\}$ converges to the desired local minimum $x^*$, where:
-$$
-\nabla F(x^*) = 0
-$$
-- 解释：$$
-x_{n+1} = x_n - \gamma \nabla F(x_n)
-$$
+$$\nabla F(x^*) = 0$$
+- 解释：$$x_{n+1} = x_n - \gamma \nabla F(x_n)$$
 
 - **$x_n$**：当前点。
 - **$\nabla F(x_n)$**：当前点的梯度（导数）。
