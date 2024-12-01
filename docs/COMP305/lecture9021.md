@@ -19,7 +19,7 @@
 
 - **These mutations prevail through selection, if they prove their worth in the current environment; otherwise they perish.**  
   如果这些突变能在当前环境中证明其价值，就会通过选择而保留下来；否则就会消亡。
-  <br>
+  <br></br>
 - **Production of offspring is the basic driving force for selection.**  
   繁殖后代是选择的基本驱动力。
 
