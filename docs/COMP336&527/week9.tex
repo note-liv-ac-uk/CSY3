@@ -1,0 +1,401 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{enumitem}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+  language=Python
+}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Parallel Computing}}
+\author{Jingyuan Sun \\ ChatGPT \ Claude}
+
+\date{Dec, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Sources of Overhead in Parallel Programs}
+
+\subsection{Parameters}
+
+In parallel programming, the runtime of a program depends on several parameters that directly influence performance:
+
+\begin{itemize}
+    \item \textbf{Wall Clock Time}:
+    \begin{itemize}
+        \item \textbf{Definition}: The time from the start of the first processor to the stopping time of the last processor in a parallel ensemble.
+        \item \textbf{Explanation}: It is the most intuitive metric to calculate the real execution time of a program, including communication delays and processor waiting times.
+    \end{itemize}
+
+    \item \textbf{Parallel Runtime}:
+    \begin{itemize}
+        \item \textbf{Definition}: The parallel runtime depends on the input size, number of processors, and communication parameters of the machine.
+        \item \textbf{Explanation}: Although parallel runtime is generally shorter than serial runtime, it is affected by various factors such as synchronization delays among processors.
+    \end{itemize}
+
+    \item \textbf{Speedup and Efficiency}:
+    \begin{itemize}
+        \item \textbf{Definitions}: 
+        \[
+        \text{Speedup} = \frac{\text{Serial Runtime}}{\text{Parallel Runtime}}, \quad \text{Efficiency} = \frac{\text{Speedup}}{\text{Processors}}
+        \]
+        \item \textbf{Explanation}: Speedup measures the acceleration achieved by parallel algorithms, and Efficiency quantifies how effectively the computational resources are utilized.
+    \end{itemize}
+
+    \item \textbf{Raw FLOP Count}:
+    \begin{itemize}
+        \item \textbf{Definition}: FLOP (Floating Point Operations Per Second) measures the computational capacity of a program but is insufficient to evaluate performance in practical problems.
+        \item \textbf{Explanation}: In solving real-world problems, factors like communication delay and data synchronization must also be considered.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Sources of Overhead in Parallel Programs}
+
+The performance of parallel programs is often limited by the following factors:
+
+\begin{itemize}
+    \item \textbf{Idling (Processor Idle Time)}:
+    \begin{itemize}
+        \item \textbf{Definition}: Processors enter idle states while waiting for other processors to complete their tasks.
+        \item \textbf{Explanation}: Similar to workers waiting for others to finish before continuing their own work.
+    \end{itemize}
+
+    \item \textbf{Communication Overhead}:
+    \begin{itemize}
+        \item \textbf{Definition}: Overhead arises due to data sharing or synchronization among processors.
+        \item \textbf{Explanation}: Like workers who need to confirm their progress with each other, causing delays.
+    \end{itemize}
+
+    \item \textbf{Synchronization Overhead}:
+    \begin{itemize}
+        \item \textbf{Definition}: To ensure task order is correct, processors must synchronize, leading to waiting times.
+        \item \textbf{Explanation}: Similar to workers ensuring tasks are completed in the correct sequence, which may involve waiting.
+    \end{itemize}
+
+    \item \textbf{Excessive Computations}:
+    \begin{itemize}
+        \item \textbf{Definition}: Some processors perform excessive calculations, causing delays compared to others.
+        \item \textbf{Explanation}: Similar to one worker being assigned too much work while others remain idle.
+    \end{itemize}
+\end{itemize}
+
+\section{Performance Metrics for Parallel Algorithms}
+
+\subsection{Serial Runtime \( T_s \)}
+The serial runtime of a program is the time elapsed between the beginning and the end of its execution on a sequential computer. It is denoted by \( T_s \).
+
+\subsection{Parallel Runtime \( T_p \)}
+The parallel runtime is the time that elapses from the moment the first processor starts to the moment the last processor finishes execution. It is denoted by \( T_p \).
+
+\subsection{Total Parallel Overhead}
+The total time collectively spent by all the processing elements is given by:
+\[
+T_{all} = p \cdot T_p,
+\]
+where \( p \) is the number of processors.
+
+The total overhead is defined as:
+\[
+T_o = T_{all} - T_s = p \cdot T_p - T_s.
+\]
+
+\subsection{Speedup \( S \)}
+Speedup measures the improvement gained by parallel execution compared to serial execution. It is defined as:
+\[
+S = \frac{T_s}{T_p}.
+\]
+In theory, the speedup is bounded by \( 0 < S \leq p \).
+
+\subsection{Efficiency \( E \)}
+Efficiency measures the fraction of time for which processing elements are usefully employed. It is given by:
+\[
+E = \frac{S}{p},
+\]
+where \( 0 < E \leq 1 \).
+
+\subsection{Example: Adding Numbers}
+To sum \( n \) numbers using \( n \) processors arranged in a logical binary tree:
+\begin{itemize}
+    \item Total steps required: \( \log n \).
+    \item Parallel runtime:
+    \[
+    T_p = \Theta(\log n).
+    \]
+    \item Speedup:
+    \[
+    S = \frac{\Theta(n)}{\Theta(\log n)} = \Theta\left(\frac{n}{\log n}\right).
+    \]
+    \item Efficiency:
+    \[
+    E = \frac{S}{p} = \Theta\left(\frac{1}{\log n}\right).
+    \]
+\end{itemize}
+
+\subsection{Improved Example: Distributed Addition}
+Each processing element adds \( \frac{n}{p} \) numbers locally, followed by aggregation:
+\begin{itemize}
+    \item Local computation time:
+    \[
+    \Theta\left(\frac{n}{p}\right).
+    \]
+    \item Aggregation time:
+    \[
+    \Theta(\log p).
+    \]
+    \item Total parallel runtime:
+    \[
+    T_p = \Theta\left(\frac{n}{p} + \log p\right).
+    \]
+    \item Speedup:
+    \[
+    S = \frac{\Theta(n)}{\Theta\left(\frac{n}{p} + \log p\right)}.
+    \]
+    \item Efficiency:
+    \[
+    E = \frac{S}{p}.
+    \]
+\end{itemize}
+
+\subsection{Scaling Characteristics of Parallel Algorithms}
+For the problem of adding \( n \) numbers on \( p \) processing elements:
+\[
+T_p = \frac{n}{p} + 2 \log p, \quad S = \frac{n}{\frac{n}{p} + 2 \log p}, \quad E = \frac{1}{1 + \frac{2p \log p}{n}}.
+\]
+
+\subsubsection{Key Formula Explanations}
+1. \textbf{Parallel Runtime \( T_p = \frac{n}{p} + 2 \log p \):}
+    \begin{itemize}
+        \item \( \frac{n}{p} \): Time for each processor to compute its local portion of the input.
+        \item \( 2 \log p \): Time for aggregating results in a binary tree structure (logarithmic depth with 2 communication rounds per level).
+    \end{itemize}
+
+2. \textbf{Speedup \( S = \frac{n}{\frac{n}{p} + 2 \log p} \):}
+    \begin{itemize}
+        \item Numerator (\( n \)): Represents the serial time.
+        \item Denominator (\( \frac{n}{p} + 2 \log p \)): Represents the total parallel time.
+        \item Overall: Measures the improvement in runtime due to parallelization.
+    \end{itemize}
+
+3. \textbf{Efficiency \( E = \frac{1}{1 + \frac{2p \log p}{n}} \):}
+    \begin{itemize}
+        \item \( 1 \): Ideal efficiency when there is no overhead.
+        \item \( \frac{2p \log p}{n} \): Captures the effect of communication overhead relative to problem size \( n \).
+        \item Overall: Highlights that efficiency decreases as overhead increases or problem size decreases.
+    \end{itemize}
+
+\subsubsection{Graphical Insight}
+- Speedup increases with \( n \) if \( T_o \) grows sublinearly with \( T_s \).
+- Efficiency remains constant by simultaneously increasing \( n \) and \( p \).
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/Speedup-processors.png}
+    \caption{Speedup-Processors}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+\section{Isoefficiency Metric of Scalability}
+
+\subsection{Definition and Key Concepts}
+The \textbf{isoefficiency metric} is used to evaluate the scalability of a parallel system. It defines the rate at which the problem size $W$ must grow with respect to the number of processing elements $p$ to maintain a constant efficiency $E$. This metric helps determine how effectively a parallel system can scale.
+
+\subsubsection{Efficiency Behavior}
+\begin{itemize}
+    \item \textbf{Graph (a):} When the problem size $W$ is fixed, efficiency $E$ decreases as the number of processors $p$ increases.
+    \item \textbf{Graph (b):} When the number of processors $p$ is fixed, efficiency $E$ increases as the problem size $W$ grows.
+\end{itemize}
+
+\subsection{Key Formulas}
+\subsubsection{Parallel Runtime}
+\begin{equation}
+T_P = \frac{W + T_o(W, p)}{p}
+\end{equation}
+\begin{itemize}
+    \item $W$: Total computational work (problem size).
+    \item $T_o(W, p)$: Total overhead as a function of $W$ and $p$.
+    \item $T_P$: Total parallel runtime.
+\end{itemize}
+
+\subsubsection{Speedup}
+\begin{equation}
+S = \frac{W}{T_P} = \frac{Wp}{W + T_o(W, p)}
+\end{equation}
+
+\subsubsection{Efficiency}
+\begin{equation}
+E = \frac{S}{p} = \frac{W}{W + T_o(W, p)} = \frac{1}{1 + \frac{T_o(W, p)}{W}}
+\end{equation}
+\begin{itemize}
+    \item Efficiency $E$ depends on the ratio $\frac{T_o(W, p)}{W}$.
+\end{itemize}
+
+\subsubsection{Isoefficiency Function}
+To maintain constant efficiency $E$, the overhead ratio $\frac{T_o(W, p)}{W}$ must be constant:
+\begin{equation}
+W = \frac{E}{1 - E} T_o(W, p)
+\end{equation}
+\begin{itemize}
+    \item $K = \frac{E}{1 - E}$: A constant dependent on the desired efficiency.
+\end{itemize}
+
+
+\subsubsection{Asymptotic Isoefficiency}
+Substituting $T_o(W, p) \approx 2p \log p$, we get:
+\begin{equation}
+W = K 2p \log p
+\end{equation}
+\begin{itemize}
+    \item The asymptotic isoefficiency function for this parallel system is $\Theta(p \log p)$.
+\end{itemize}
+
+\subsection{Scalability Interpretation}
+A scalable parallel program maintains constant efficiency by increasing the problem size proportionally to the isoefficiency function. For instance, if the number of processors increases from $p$ to $p'$, the problem size $W$ must increase by a factor of $\frac{p' \log p'}{p \log p}$ to maintain efficiency.
+
+\subsection{Amdahl's Law and Isoefficiency}
+For fixed problem sizes, scalability is limited by the sequential portion of the workload:
+\begin{equation}
+S_p = \frac{W}{\alpha W + \frac{(1 - \alpha)W}{p}}
+\end{equation}
+\begin{itemize}
+    \item $\alpha$: Fraction of the workload that is sequential.
+\end{itemize}
+As $p \to \infty$, the speedup is limited by:
+\begin{equation}
+\text{Speedup is limited by } \frac{1}{\alpha}.
+\end{equation}
+
+
+\section{Communication-Avoiding Algorithms and Scalability}
+
+\subsection{Naïve Matrix Multiplication}
+The \textbf{naïve matrix multiplication} computes the product $C = A \times B$, where $A$, $B$, and $C$ are $n \times n$ matrices. The element $C(i,j)$ is computed as:
+\[
+C(i,j) = \sum_{k=1}^n A(i,k) \cdot B(k,j)
+\]
+
+\subsubsection{Complexity Analysis}
+\begin{itemize}
+    \item \textbf{Arithmetic Operations:} $O(n^3)$ scalar multiplications and additions.
+    \item \textbf{Memory Access:} 
+    \begin{itemize}
+        \item $n^2$ reads for rows of $A$.
+        \item $n^2$ reads for columns of $B$.
+        \item $n^2$ writes for $C$.
+        \item Total memory reads/writes: $n^3 + 3n^2$.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Pesudo Code}
+The naive algorithm computes $C$ by iterating through rows of $A$ and columns of $B$:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/NavieMM.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Blocked (Tiled) Matrix Multiply}
+To reduce memory traffic, blocked matrix multiplication divides $A$, $B$, and $C$ into $b \times b$ blocks.
+
+\subsubsection{Algorithm}
+Each block of $C$ is computed using corresponding blocks of $A$ and $B$:
+\[
+C[i,j] += A[i,k] \cdot B[k,j], \quad \text{for all blocks } i,j,k.
+\]
+
+\subsubsection{Complexity Analysis}
+\begin{itemize}
+    \item \textbf{Arithmetic Operations:} $O(n^3)$.
+    \item \textbf{Memory Access:} 
+    \[
+    O\left( \frac{2n^3}{b} + 2n^2 \right)
+    \]
+    due to reduced redundant memory reads and writes.
+\end{itemize}
+
+\subsubsection{Pesudo Code}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/BlockedMM.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{SUMMA Algorithm}
+The \textbf{Scalable Universal Matrix Multiply Algorithm (SUMMA)} optimizes matrix multiplication for distributed memory systems. It uses a $P^{1/2} \times P^{1/2}$ processor grid.
+
+\subsubsection{Algorithm}
+\begin{itemize}
+    \item Divide $A$, $B$, and $C$ into blocks.
+    \item Broadcast submatrices of $A$ and $B$ along processor rows and columns.
+    \item Compute partial results for each block in parallel.
+\end{itemize}
+
+\subsubsection{Complexity Analysis}
+\begin{itemize}
+    \item \textbf{Arithmetic Operations:} $O(n^3)$.
+    \item \textbf{Communication Cost:} 
+    \begin{itemize}
+        \item Words moved: $O(n^2 \log P)$.
+        \item Messages sent: $O(\log P)$.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Python Implementation}
+\begin{lstlisting}
+def summa_matrix_multiply(A, B, block_size, processor_grid):
+    n = len(A)
+    C = np.zeros((n, n))
+    p = len(processor_grid)  # Number of processors
+    
+    # Iterate over blocks
+    for k in range(0, n, block_size):
+        for i in range(0, n, block_size):  # Processor rows
+            for j in range(0, n, block_size):  # Processor columns
+                # Broadcast blocks
+                A_block = A[i:i+block_size, k:k+block_size]
+                B_block = B[k:k+block_size, j:j+block_size]
+                
+                # Compute local block
+                C[i:i+block_size, j:j+block_size] += A_block @ B_block
+    return C
+\end{lstlisting}
+
+\subsection{Comparison of Methods}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Arithmetic Complexity} & \textbf{Memory Access} & \textbf{Communication Cost} \\ \hline
+Naïve Multiply & $O(n^3)$ & $O(n^3 + 3n^2)$ & $O(n^3)$ (sequential) \\ \hline
+Blocked Multiply & $O(n^3)$ & $O(2n^3/b + 2n^2)$ & $O(n^2)$ \\ \hline
+SUMMA & $O(n^3)$ & $O(n^2 \log P)$ & $O(\log P)$ \\ \hline
+\end{tabular}
+\caption{Comparison of Matrix Multiplication Algorithms}
+\end{table}
+
+
+\end{document}

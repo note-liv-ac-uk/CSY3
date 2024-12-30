@@ -1,0 +1,559 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Probabilistic Modelling}}
+\author{Jingyuan Sun \\ ChatGPT \ Claude}
+
+\date{Dec, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Probability Theory and Statistics Recap}
+
+\subsection{Probability Space}
+
+A probability space is defined as a triple \((\Omega, \mathcal{F}, P)\), where:
+\begin{itemize}
+    \item \(\Omega\) is the \textbf{sample space}, the set of all possible outcomes.
+    \item \(\mathcal{F}\) is the \textbf{event space}, a \(\sigma\)-algebra of subsets of \(\Omega\), containing all events of interest.
+    \item \(P\) is the \textbf{probability measure}, a function \(P: \mathcal{F} \to [0,1]\) that assigns a probability to each event, satisfying:
+    \begin{enumerate}
+        \item Non-negativity: \(P(A) \geq 0\) for all \(A \in \mathcal{F}\),
+        \item Normalization: \(P(\Omega) = 1\),
+        \item Countable additivity: If \(\{A_i\}_{i=1}^\infty\) are disjoint, then \(P\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)\).
+    \end{enumerate}
+\end{itemize}
+
+\textbf{Example:} In the experiment of rolling a die:
+\begin{itemize}
+    \item \(\Omega = \{1, 2, 3, 4, 5, 6\}\).
+    \item \(\mathcal{F} = 2^\Omega\) (the power set of \(\Omega\)).
+    \item \(P\) assigns equal probability \(P(\{i\}) = \frac{1}{6}\) to each outcome \(i\).
+\end{itemize}
+
+\subsection{Probability Distributions}
+
+\subsubsection{Discrete Distributions}
+
+\paragraph{Binomial Distribution:}
+The binomial distribution models the number of successes in \(n\) independent Bernoulli trials, each with success probability \(p\). Its probability mass function is:
+\[
+X \sim \text{Binomial}(n, p), \quad P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, \dots, n.
+\]
+
+\textbf{Example:} Suppose a coin with a probability \(p = 0.6\) of landing heads is flipped \(n = 10\) times. What is the probability of exactly 6 heads?
+\[
+P(X = 6) = \binom{10}{6} (0.6)^6 (0.4)^4 = \frac{10!}{6! \cdot 4!} \cdot (0.6)^6 \cdot (0.4)^4 \approx 0.2508.
+\]
+
+\paragraph{Bernoulli Distribution:}
+The Bernoulli distribution is a special case of the binomial distribution with \(n=1\). Its probability mass function is:
+\[
+X \sim \text{Bernoulli}(p), \quad P(X=1) = p, \quad P(X=0) = 1-p.
+\]
+
+\textbf{Example:} A light bulb has a 70\% chance of functioning. What is the probability that it works (1) or fails (0)?
+\[
+P(X=1) = 0.7, \quad P(X=0) = 1 - 0.7 = 0.3.
+\]
+
+\paragraph{Poisson Distribution:}
+The Poisson distribution models the number of events occurring in a fixed interval of time or space, given the mean rate \(\lambda\). Its probability mass function is:
+\[
+X \sim \text{Poisson}(\lambda), \quad P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}, \quad k \geq 0.
+\]
+
+\textbf{Example:} On average, 5 customers arrive at a store per hour. What is the probability of exactly 3 customers arriving in an hour?
+\[
+P(X = 3) = \frac{5^3 e^{-5}}{3!} = \frac{125 \cdot e^{-5}}{6} \approx 0.1404.
+\]
+
+\paragraph{Hypergeometric Distribution:}
+The hypergeometric distribution models the number of successes \(X\) in \(k\) draws without replacement from a population of \(m\) successes and \(n\) failures:
+\[
+X \sim \text{Hypergeometric}(m, n, k), \quad P(X = x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m+n}{k}}, \quad x = 0, 1, \dots, \min(k, m).
+\]
+
+\textbf{Example:} A box contains 7 defective and 13 functional items. If 5 are selected at random, what is the probability of exactly 2 defective items?
+\[
+P(X = 2) = \frac{\binom{7}{2} \binom{13}{3}}{\binom{20}{5}} = \frac{21 \cdot 286}{15504} \approx 0.386.
+\]
+
+\subsubsection{Continuous Distributions}
+
+\paragraph{Normal Distribution:}
+The normal distribution, or Gaussian distribution, is defined by its mean \(\mu\) and variance \(\sigma^2\). Its probability density function (PDF) is:
+\[
+X \sim \mathcal{N}(\mu, \sigma^2), \quad f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}.
+\]
+
+\textbf{Example:} If \(X \sim \mathcal{N}(0, 1)\), find the probability \(P(-1 \leq X \leq 1)\).
+\[
+P(-1 \leq X \leq 1) = \int_{-1}^1 \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx \approx 0.6826.
+\]
+(The result comes from standard normal tables or numerical integration.)
+
+\paragraph{Beta Distribution:}
+The beta distribution models probabilities and is parameterized by \(\alpha > 0\) and \(\beta > 0\). Its PDF is:
+\[
+X \sim \text{Beta}(\alpha, \beta), \quad f(x) = \frac{x^{\alpha-1} (1-x)^{\beta-1}}{B(\alpha, \beta)}, \quad x \in [0, 1],
+\]
+where \(B(\alpha, \beta)\) is the beta function.
+\paragraph{Beta Function:}
+The beta function, denoted as \( B(\alpha, \beta) \), is a special function defined for \(\alpha > 0\) and \(\beta > 0\). It is expressed as:
+\[
+B(\alpha, \beta) = \int_0^1 t^{\alpha - 1} (1 - t)^{\beta - 1} \, dt,
+\]
+where \( t \in [0, 1] \).
+
+The beta function can also be expressed in terms of the gamma function:
+\[
+B(\alpha, \beta) = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)},
+\]
+where \(\Gamma(x)\) is the gamma function defined by:
+\[
+\Gamma(x) = \int_0^\infty t^{x-1} e^{-t} \, dt.
+\]
+
+\textbf{Explanation:} The beta function arises in the computation of the Beta distribution's normalization constant and is frequently used in probability and statistics. It represents the area under a curve defined by \( t^{\alpha - 1} (1 - t)^{\beta - 1} \) over the interval \([0, 1]\).
+
+\textbf{Example:} Compute \( B(2, 3) \):
+\[
+B(2, 3) = \int_0^1 t^{2-1} (1 - t)^{3-1} \, dt = \int_0^1 t (1 - t)^2 \, dt.
+\]
+
+To solve:
+\[
+\int_0^1 t (1 - t)^2 \, dt = \int_0^1 (t - 2t^2 + t^3) \, dt = \left[ \frac{t^2}{2} - \frac{2t^3}{3} + \frac{t^4}{4} \right]_0^1 = \frac{1}{2} - \frac{2}{3} + \frac{1}{4}.
+\]
+
+Simplifying:
+\[
+B(2, 3) = \frac{6}{24} - \frac{16}{24} + \frac{6}{24} = \frac{6}{24} = \frac{1}{4}.
+\]
+
+Thus, \( B(2, 3) = \frac{1}{4} \).
+
+
+
+\paragraph{Gamma Distribution:}
+The gamma distribution is parameterized by shape \(\alpha > 0\) and rate \(\beta > 0\). Its PDF is:
+\[
+X \sim \text{Gamma}(\alpha, \beta), \quad f(x) = \frac{\beta^\alpha x^{\alpha-1} e^{-\beta x}}{\Gamma(\alpha)}, \quad x > 0.
+\]
+
+\textbf{Example:} If \(X \sim \text{Gamma}(3, 2)\), find \(P(1 \leq X \leq 2)\):
+\[
+P(1 \leq X \leq 2) = \int_{1}^{2} \frac{2^3 x^2 e^{-2x}}{\Gamma(3)} dx.
+\]
+(This integral can be evaluated numerically or using software.)
+
+\paragraph{Student's t-Distribution:}
+The \(t\)-distribution is used in estimating population means. Its PDF is:
+\[
+X \sim t_k, \quad f(x) \propto \left(1 + \frac{x^2}{k}\right)^{-\frac{k+1}{2}},
+\]
+where \(k\) is the degrees of freedom.
+
+\textbf{Example:} If \(X \sim t_5\), find \(P(-2 \leq X \leq 2)\). Use the cumulative distribution function (CDF) or numerical methods to find:
+\[
+P(-2 \leq X \leq 2) \approx 0.919.
+\]
+
+\paragraph{Chi-Squared Distribution:}
+The chi-squared distribution is a special case of the gamma distribution, used in hypothesis testing. Its PDF is:
+\[
+X \sim \chi_k^2, \quad f(x) = \frac{x^{k/2-1} e^{-x/2}}{2^{k/2} \Gamma(k/2)}, \quad x \geq 0.
+\]
+
+\textbf{Example:} If \(X \sim \chi_3^2\), find \(P(X \geq 4)\):
+\[
+P(X \geq 4) = \int_{4}^\infty \frac{x^{1/2} e^{-x/2}}{2^{3/2} \Gamma(3/2)} dx.
+\]
+(This integral can be evaluated numerically or using chi-squared tables.)
+
+
+\subsection{Expectation}
+
+The expectation of a random variable \(X\) is:
+\[
+\mathbb{E}[X] = \begin{cases} 
+\sum_x x P(X=x), & \text{if } X \text{ is discrete}, \\
+\int_{-\infty}^\infty x f(x) \, dx, & \text{if } X \text{ is continuous}.
+\end{cases}
+\]
+
+\textbf{Example:} The expected value of a die roll is:
+\[
+\mathbb{E}[X] = \sum_{i=1}^6 i \cdot \frac{1}{6} = 3.5.
+\]
+
+\subsection{Summary Statistics}
+
+\paragraph{Mean:} The mean is the average value:
+\[
+\mu = \mathbb{E}[X].
+\]
+
+\paragraph{Standard Deviation:} The standard deviation measures spread:
+\[
+\sigma = \sqrt{\mathbb{E}[(X-\mu)^2]}.
+\]
+
+\paragraph{Skewness:} Skewness quantifies asymmetry:
+\[
+\text{Skewness} = \mathbb{E}\left[\left(\frac{X - \mu}{\sigma}\right)^3\right].
+\]
+
+\paragraph{Median:} The median is the value that splits the data into two equal parts.
+
+\paragraph{Full Width Half Maximum (FWHM):} For a unimodal distribution, FWHM is the width at half the maximum PDF value.
+
+\paragraph{Covariance:} The covariance between \(X\) and \(Y\) is:
+\[
+\text{Cov}(X, Y) = \mathbb{E}[(X - \mu_X)(Y - \mu_Y)].
+\]
+
+\paragraph{Correlation:} The correlation coefficient is:
+\[
+r(X, Y) = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}.
+\]
+\
+
+
+
+\section{Sampling and Estimation}
+
+\subsection{Sampling}
+Sampling is the process of selecting a subset (a sample) of individuals or observations from a larger population to estimate population parameters. Sampling allows us to analyze data when the population is too large to study in its entirety.
+
+\subsubsection*{Simple Random Sampling}
+A \textbf{simple random sample} is a sample where each subset of a fixed size $n$ has an equal probability of being selected. Sampling can occur \textbf{with replacement} (selected individuals can appear multiple times) or \textbf{without replacement} (each individual appears only once).
+
+\paragraph{Example:}
+Consider a population of 100 individuals. Selecting 10 individuals randomly ensures each possible group of 10 has an equal chance of selection. In practice, this ensures unbiased estimates of population parameters.
+
+\subsection{Estimators}
+An \textbf{estimator} is a statistic calculated from a sample used to infer the value of a population parameter. For a parameter $\theta$, the estimator $\hat{\theta}$ is a random variable whose distribution depends on the sampling procedure.
+
+\subsubsection*{Properties of Estimators}
+\begin{itemize}
+    \item \textbf{Unbiasedness:} An estimator $\hat{\theta}$ is unbiased if $\mathbb{E}[\hat{\theta}] = \theta$, where $\theta$ is the true population parameter.
+    \item \textbf{Variance:} The variance of an estimator $\hat{\theta}$ measures its spread and is defined as $\text{Var}(\hat{\theta}) = \mathbb{E}[(\hat{\theta} - \mathbb{E}[\hat{\theta}])^2]$.
+    \item \textbf{Mean Squared Error (MSE):} $\text{MSE}(\hat{\theta}) = \mathbb{E}[(\hat{\theta} - \theta)^2]$, which decomposes into bias and variance terms: $\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + (\text{Bias}(\hat{\theta}))^2$.
+\end{itemize}
+
+\paragraph{Example: Sample Mean as an Estimator}
+The sample mean $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$ is an unbiased estimator of the population mean $\mu$. Its variance is $\frac{\sigma^2}{n}$, where $\sigma^2$ is the population variance.
+
+\subsection{Sampling Strategies}
+\subsubsection*{Cluster Sampling}
+\textbf{Cluster sampling} divides the population into clusters and randomly selects clusters to study. Sampling can involve:
+\begin{itemize}
+    \item \textbf{One-stage cluster sampling:} Entire clusters are sampled.
+    \item \textbf{Two-stage cluster sampling:} A sample is drawn within each selected cluster.
+\end{itemize}
+
+\paragraph{Example:}
+In a city with 100 schools, we randomly select 10 schools and then survey every student in the chosen schools (one-stage) or a subset of students from each chosen school (two-stage).
+
+\subsubsection*{Stratified Sampling}
+\textbf{Stratified sampling} divides the population into distinct subgroups, called strata, based on specific characteristics (e.g., age, income). A random sample is then taken from each stratum. This ensures representation from each subgroup and improves the precision of the estimates compared to simple random sampling.
+
+\paragraph{Definition:}
+If the population is divided into $k$ strata, with the $i$-th stratum containing $N_i$ individuals, and the total population size is $N = \sum_{i=1}^k N_i$, then:
+\begin{itemize}
+    \item Proportional allocation: Sample size from the $i$-th stratum is $n_i = n \cdot \frac{N_i}{N}$, where $n$ is the total sample size.
+    \item Optimal allocation (for minimizing variance): Sample size from the $i$-th stratum is proportional to $\frac{N_i \sigma_i}{\sum_{j=1}^k N_j \sigma_j}$, where $\sigma_i$ is the standard deviation within the $i$-th stratum.
+\end{itemize}
+
+\paragraph{Example:}
+Consider a population divided into three age groups: children, adults, and seniors. If children make up 30\% of the population, adults 50\%, and seniors 20\%, a stratified sample of size $n=100$ would include 30 children, 50 adults, and 20 seniors.
+
+\subsubsection*{Sampling a Diverse Population}
+When sampling from a diverse population, it is essential to ensure that all subgroups are represented to avoid bias. This is particularly relevant in studies where the population is heterogeneous in terms of demographics, income levels, or geographic location. 
+
+\paragraph{Key Considerations:}
+\begin{itemize}
+    \item Ensure adequate representation of smaller subgroups to capture their variability.
+    \item Use stratified sampling or oversampling techniques if certain groups are underrepresented.
+\end{itemize}
+
+\paragraph{Example:}
+In a survey of healthcare preferences across urban and rural areas, a simple random sample may underrepresent rural participants. Stratified sampling ensures proportional representation of urban and rural residents, allowing for more accurate insights into population-wide preferences.
+
+
+\subsection{Resampling}
+\textbf{Resampling} involves repeatedly drawing samples from the original data to estimate variability or adjust for bias.
+
+\subsubsection*{The Jackknife Estimator}
+For a dataset of $n$ observations, the jackknife estimator recalculates the statistic of interest, excluding one observation at a time:
+\[
+\hat{\theta}_{(i)} \quad \text{(statistic recalculated without the $i$-th observation)}.
+\]
+The jackknife estimate is then:
+\[
+\hat{\theta}_J = \frac{1}{n} \sum_{i=1}^n \hat{\theta}_{(i)}.
+\]
+
+\subsubsection*{Bootstrap Method}
+The bootstrap method involves sampling with replacement from the data to generate multiple datasets (replicates), calculating the statistic for each replicate, and using the distribution of these statistics to estimate variability or confidence intervals.
+
+\paragraph{Example:}
+Given a sample of size $n$, we create $B$ bootstrap samples (each of size $n$), compute the mean for each sample, and use these means to estimate the confidence interval for the population mean.
+
+
+
+
+
+\section{Probabilistic Models}
+
+\subsection{Linear Regression}
+
+\subsubsection{Model Definition}
+The linear regression model assumes the relationship between a dependent variable \( y \) and independent variables \( x_1, x_2, \dots, x_p \):
+\[
+y_i = \beta_0 + \sum_{j=1}^p x_{ij} \beta_j + \epsilon_i, \quad i = 1, 2, \dots, n,
+\]
+or equivalently in matrix form:
+\[
+\mathbf{y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\epsilon},
+\]
+where:
+\begin{itemize}
+    \item \( \mathbf{y} \in \mathbb{R}^{n \times 1} \): Vector of observed outcomes.
+    \item \( \mathbf{X} \in \mathbb{R}^{n \times (p+1)} \): Design matrix with the first column as \( 1 \) (intercept) and remaining columns as predictors.
+    \item \( \boldsymbol{\beta} \in \mathbb{R}^{(p+1) \times 1} \): Coefficient vector.
+    \item \( \boldsymbol{\epsilon} \in \mathbb{R}^{n \times 1} \): Error vector, assumed to satisfy \( \mathbb{E}[\boldsymbol{\epsilon}] = 0 \), \( \text{Var}(\boldsymbol{\epsilon}) = \sigma^2 \mathbf{I} \).
+\end{itemize}
+
+\subsubsection{Objective Function: Least Squares}
+The coefficients \( \boldsymbol{\beta} \) are estimated by minimizing the sum of squared residuals:
+\[
+e(\boldsymbol{\beta}) = \|\mathbf{y} - \mathbf{X}\boldsymbol{\beta}\|_2^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
+\]
+
+Expanding the quadratic form:
+\[
+e(\boldsymbol{\beta}) = \mathbf{y}^\top \mathbf{y} - 2 \mathbf{y}^\top \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta}.
+\]
+
+\subsubsection{Optimization: First-Order Condition}
+To minimize \( e(\boldsymbol{\beta}) \), we compute the gradient with respect to \( \boldsymbol{\beta} \):
+\[
+\frac{\partial e(\boldsymbol{\beta})}{\partial \boldsymbol{\beta}} = -2 \mathbf{X}^\top \mathbf{y} + 2 \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta}.
+\]
+Setting the gradient to zero:
+\[
+-2 \mathbf{X}^\top \mathbf{y} + 2 \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = 0.
+\]
+
+Simplify:
+\[
+\mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^\top \mathbf{y}.
+\]
+
+\subsubsection{Solution: OLS Estimator}
+Assuming \( \mathbf{X}^\top \mathbf{X} \) is invertible, the solution for \( \boldsymbol{\beta} \) is:
+\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}.
+\]
+
+\subsubsection{Predicted Values and Residuals}
+Using the estimated coefficients \( \hat{\boldsymbol{\beta}} \), the predicted values \( \hat{\mathbf{y}} \) and residuals \( \mathbf{r} \) are:
+\[
+\hat{\mathbf{y}} = \mathbf{X} \hat{\boldsymbol{\beta}} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y},
+\]
+\[
+\mathbf{r} = \mathbf{y} - \hat{\mathbf{y}}.
+\]
+
+\subsubsection{Variance of the Error Term}
+The variance of the error term \( \sigma^2 \) is estimated using the residual sum of squares:
+\[
+\hat{\sigma}^2 = \frac{\mathbf{r}^\top \mathbf{r}}{n - p - 1} = \frac{(\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}})^\top (\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}})}{n - p - 1}.
+\]
+
+\subsubsection{Statistical Properties of OLS}
+\begin{itemize}
+    \item If \( \boldsymbol{\epsilon} \sim \mathcal{N}(0, \sigma^2 \mathbf{I}) \), then \( \hat{\boldsymbol{\beta}} \sim \mathcal{N}(\boldsymbol{\beta}, \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}) \).
+    \item The variance of \( \hat{\boldsymbol{\beta}} \) is given by:
+    \[
+    \text{Var}(\hat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}.
+    \]
+\end{itemize}
+
+\subsubsection{Example: Simple Linear Regression}
+Suppose we want to predict the Gross National Product (GNP) \( y \) based on Employment \( x \):
+\[
+y_i = \beta_0 + \beta_1 x_i + \epsilon_i.
+\]
+
+Given the data:
+\[
+\mathbf{X} = 
+\begin{bmatrix}
+1 & x_1 \\
+1 & x_2 \\
+\vdots & \vdots \\
+1 & x_n
+\end{bmatrix}, \quad 
+\mathbf{y} =
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{bmatrix},
+\]
+we calculate:
+\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}.
+\]
+
+The predictions are:
+\[
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i, \quad i = 1, 2, \dots, n.
+\]
+
+
+\subsection{Logistic Regression}
+For binary classification (\( y \in \{0, 1\} \)), the \textbf{logistic regression model} uses:
+\[
+z_i = \sum_{j=1}^p x_{ij}\beta_j, \quad P(y_i = 1 \mid \mathbf{x}_i) = \frac{1}{1 + e^{-z_i}},
+\]
+where \( z_i \) represents the \textit{log-odds}. The parameters \( \boldsymbol{\beta} \) are estimated via \textbf{maximum likelihood estimation (MLE)}.
+
+\paragraph{Example:}
+Predicting whether a customer will purchase a product (\( y = 1 \)) based on age and income.
+
+\subsection{Time Series Models}
+
+\subsection{Introduction to Time Series}
+A time series is a sequence of observations indexed by time \( t \). It is denoted as:
+\[
+\{X_t\}_{t=1}^{T},
+\]
+where \( t = 1, 2, \dots, T \) represents time.
+
+\subsubsection{Stationarity}
+A time series is weakly stationary if it satisfies:
+\begin{itemize}
+    \item Constant mean: \( \mu = \mathbb{E}[X_t] \),
+    \item Constant variance: \( \sigma^2 = \text{Var}(X_t) \),
+    \item Autocovariance depends only on lag: \( \gamma_k = \text{Cov}(X_t, X_{t-k}) \).
+\end{itemize}
+
+\subsubsection{Autoregressive (AR) Model}
+The AR model of order \( p \) is defined as:
+\[
+X_t = c + \sum_{i=1}^p \phi_i X_{t-i} + \epsilon_t,
+\]
+where \( \phi_i \) are the AR coefficients, \( \epsilon_t \sim \mathcal{N}(0, \sigma^2) \).
+
+\subsubsection{Moving Average (MA) Model}
+The MA model of order \( q \) is defined as:
+\[
+X_t = c + \sum_{j=1}^q \theta_j \epsilon_{t-j} + \epsilon_t,
+\]
+where \( \theta_j \) are the MA coefficients.
+
+\subsubsection{Autoregressive Moving Average (ARMA) Model}
+Combining the AR and MA models, the ARMA model of order \( (p, q) \) is:
+\[
+X_t = c + \sum_{i=1}^p \phi_i X_{t-i} + \sum_{j=1}^q \theta_j \epsilon_{t-j} + \epsilon_t.
+\]
+
+\subsubsection{Autoregressive Integrated Moving Average (ARIMA) Model}
+For non-stationary time series, the ARIMA model includes differencing:
+\[
+\nabla^d X_t = (1 - B)^d X_t,
+\]
+where \( \nabla^d X_t \) is the \( d \)-th differenced series, \( B \) is the backward shift operator.
+
+The ARIMA model of order \( (p, d, q) \) is expressed as:
+\[
+X_t = c + \sum_{i=1}^p \phi_i X_{t-i} + \sum_{j=1}^q \theta_j \epsilon_{t-j} + \epsilon_t,
+\]
+where \( p, d, q \) represent the orders of autoregression, differencing, and moving average.
+
+\subsubsection{Example: ARIMA(1, 1, 1)}
+Suppose we have a time series with:
+\begin{itemize}
+    \item \( p = 1 \): one autoregressive term,
+    \item \( d = 1 \): first-order differencing,
+    \item \( q = 1 \): one moving average term.
+\end{itemize}
+
+The model is:
+\[
+\nabla X_t = \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t,
+\]
+where \( \nabla X_t = X_t - X_{t-1} \).
+
+Given \( \phi_1 = 0.8, \theta_1 = 0.5 \), and \( \epsilon_t \sim \mathcal{N}(0, 1) \), we can forecast future values using the past observations.
+
+\subsubsection{Seasonality and Decomposition}
+A time series can also exhibit:
+\begin{itemize}
+    \item Trend: long-term movement,
+    \item Seasonality: periodic fluctuations,
+    \item Noise: random variation.
+\end{itemize}
+
+The Seasonal-Trend Decomposition (STL) method splits a series into components:
+\[
+X_t = \text{Trend}_t + \text{Seasonality}_t + \text{Residual}_t.
+\]
+
+
+\subsection{Polynomial Regression}
+A \textbf{polynomial regression} model includes higher-order terms of the predictors:
+\[
+y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \cdots + \beta_kx_i^k + \epsilon_i.
+\]
+
+\paragraph{Example:}
+Modeling the trajectory of a projectile with quadratic terms.
+
+\subsection{Underfitting and Overfitting}
+\begin{itemize}
+    \item \textbf{Underfitting}: Model is too simple, failing to capture data complexity.
+    \item \textbf{Overfitting}: Model is too complex, fitting noise instead of patterns.
+\end{itemize}
+
+\paragraph{Example:}
+Predicting exam scores with too few or too many predictors.
+
+\subsection{Regularisation}
+Regularisation reduces model complexity by adding penalties to the loss function.
+
+\paragraph{Ridge Regression:}
+\[
+\min \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^p \beta_j^2.
+\]
+This introduces a penalty term \( \lambda \), controlling the magnitude of coefficients.
+
+\paragraph{Example:}
+Predicting house prices using correlated predictors, where regularisation avoids overfitting.
+
+
+
+
+\end{document}

@@ -1,0 +1,481 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Clustering}}
+\author{Jingyuan Sun \\ ChatGPT \ Claude}
+
+\date{Dec, 2024}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction to Clustering}
+Clustering is a fundamental technique in unsupervised learning, aimed at grouping data points based on their similarity or dissimilarity. This section introduces the key concepts of clustering, starting with the distinction between supervised and unsupervised learning, followed by a detailed exploration of distance metrics.
+
+\subsection{Unsupervised vs. Supervised Learning}
+\begin{definition}[Supervised Learning]
+Supervised learning is a type of machine learning where the algorithm is trained on labeled data. Given a dataset $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$, where $\mathbf{x}_i \in \mathbb{R}^d$ represents the features and $y_i \in \mathcal{Y}$ is the corresponding label, the objective is to learn a function $f: \mathbb{R}^d \to \mathcal{Y}$ that minimizes a loss function over the labeled dataset.
+\end{definition}
+
+\begin{definition}[Unsupervised Learning]
+Unsupervised learning is a type of machine learning where the algorithm learns patterns, structures, or relationships from unlabeled data. Given a dataset $\{\mathbf{x}_i\}_{i=1}^n$, where $\mathbf{x}_i \in \mathbb{R}^d$, the goal is to discover underlying structures in the data, such as clusters or dimensionality reduction mappings.
+\end{definition}
+
+\paragraph{Key Differences:}
+\begin{itemize}
+    \item \textbf{Supervised Learning:} Requires labeled data and aims to predict outputs for unseen inputs.
+    \item \textbf{Unsupervised Learning:} Operates on unlabeled data, focusing on pattern discovery.
+\end{itemize}
+
+\paragraph{Applications:}
+\begin{itemize}
+    \item \textbf{Unsupervised Learning:} Clustering, anomaly detection, dimensionality reduction.
+    \item \textbf{Supervised Learning:} Classification, regression, and ranking tasks.
+\end{itemize}
+
+\subsection{Distance Metrics}
+Distance metrics are essential in clustering algorithms, as they define the similarity or dissimilarity between data points. A distance function $d: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}_{\geq 0}$ must satisfy the following properties:
+
+\begin{definition}[Distance Metric]
+A function $d(\mathbf{x}, \mathbf{y})$ is a valid distance metric if:
+\begin{enumerate}
+    \item \textbf{Non-negativity:} $d(\mathbf{x}, \mathbf{y}) \geq 0, \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^d$.
+    \item \textbf{Identity of Indiscernibles:} $d(\mathbf{x}, \mathbf{y}) = 0$ if and only if $\mathbf{x} = \mathbf{y}$.
+    \item \textbf{Symmetry:} $d(\mathbf{x}, \mathbf{y}) = d(\mathbf{y}, \mathbf{x})$.
+    \item \textbf{Triangle Inequality:} $d(\mathbf{x}, \mathbf{z}) \leq d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z})$.
+\end{enumerate}
+\end{definition}
+
+\paragraph{Common Distance Metrics:}
+\begin{itemize}
+    \item \textbf{Euclidean Distance:}
+    \[
+    d_{\text{Euc}}(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{i=1}^d (x_i - y_i)^2}.
+    \]
+    Measures the straight-line distance between two points in Euclidean space.
+
+    \item \textbf{Cosine Similarity:}
+    \[
+    \text{similarity}_{\text{cos}}(\mathbf{x}, \mathbf{y}) = \frac{\mathbf{x}^\top \mathbf{y}}{\|\mathbf{x}\| \|\mathbf{y}\|}.
+    \]
+    The dissimilarity is defined as:
+    \[
+    d_{\text{cos}}(\mathbf{x}, \mathbf{y}) = 1 - \text{similarity}_{\text{cos}}(\mathbf{x}, \mathbf{y}).
+    \]
+    Measures the angle between two vectors, commonly used in text analysis.
+
+    \item \textbf{Mahalanobis Distance:}
+    \[
+    d_{\text{Mah}}(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x} - \mathbf{y})^\top \mathbf{S}^{-1} (\mathbf{x} - \mathbf{y})},
+    \]
+    where $\mathbf{S}$ is the covariance matrix of the dataset. This metric accounts for correlations between variables and is often used for identifying outliers.
+\end{itemize}
+
+\paragraph{Visual Examples:}
+Figure~\ref{fig:distance_examples} illustrates the application of these distance metrics in clustering tasks, highlighting their impact on cluster shapes and boundaries.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.43\textwidth]{images/distance_example.jpg}
+\caption{Examples of Euclidean, Manhattan, Cosine, and Mahalanobis distances applied to clustering.}
+\label{fig:distance_examples}
+\end{figure}
+
+
+
+\section{Hierarchical Agglomerative Clustering (HAC)}
+
+\subsection{Algorithm Description}
+Hierarchical Agglomerative Clustering (HAC) is an iterative clustering algorithm that builds a hierarchy of clusters. The steps of the algorithm are as follows:
+\begin{enumerate}
+    \item Initialize each data point as a single-element cluster.
+    \item Compute the pairwise dissimilarity matrix $C$, where $C_{ij}$ represents the dissimilarity between clusters $i$ and $j$.
+    \item Repeat until only one cluster remains:
+    \begin{enumerate}
+        \item Find the two clusters $A$ and $B$ with the smallest dissimilarity, i.e., 
+        \[
+        (A, B) = \arg \min_{i, j} C_{ij}, \quad i \neq j.
+        \]
+        \item Merge $A$ and $B$ into a single cluster.
+        \item Update the dissimilarity matrix $C$ to reflect the dissimilarity between the new cluster and all remaining clusters based on a specified linkage method.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Linkages and Distance Measures}
+Linkages determine how dissimilarities between clusters are computed when merging. The following are common linkage methods:
+
+\subsubsection{Single Linkage}
+The dissimilarity between clusters $A$ and $B$ is defined as:
+\[
+d(A, B) = \min_{x \in A, y \in B} d(x, y),
+\]
+where $d(x, y)$ is the pairwise dissimilarity between points $x$ and $y$.
+
+\textit{Explanation:} This method focuses on the closest pair of points from two clusters, resulting in elongated, chain-like clusters.
+
+\subsubsection{Complete Linkage}
+The dissimilarity between clusters $A$ and $B$ is defined as:
+\[
+d(A, B) = \max_{x \in A, y \in B} d(x, y).
+\]
+
+\textit{Explanation:} This method considers the farthest pair of points between clusters, which tends to produce compact, spherical clusters.
+
+\subsubsection{Average Linkage}
+The dissimilarity between clusters $A$ and $B$ is defined as:
+\[
+d(A, B) = \frac{1}{|A| \cdot |B|} \sum_{x \in A, y \in B} d(x, y),
+\]
+where $|A|$ and $|B|$ are the sizes of clusters $A$ and $B$, respectively.
+
+\textit{Explanation:} This method averages the distances between all pairs of points in the two clusters and often produces results between single and complete linkage.
+
+\subsubsection{Ward’s Linkage}
+Ward’s Linkage minimizes the increase in within-cluster variance after merging clusters $A$ and $B$. The increase is given by:
+\[
+\Delta(A, B) = \sum_{i \in A \cup B} \|x_i - c_{A \cup B}\|^2 - \sum_{i \in A} \|x_i - c_A\|^2 - \sum_{i \in B} \|x_i - c_B\|^2,
+\]
+where $c_A$, $c_B$, and $c_{A \cup B}$ are the centroids of clusters $A$, $B$, and their union, respectively.
+
+The change in variance can be rewritten as:
+\[
+\Delta(A, B) = \frac{|A| \cdot |B|}{|A| + |B|} \|c_A - c_B\|^2.
+\]
+
+\textit{Explanation:} This method seeks to create compact, spherical clusters by minimizing the within-cluster variance.
+
+\subsubsection{Ward’s Linkage Formula Derivation}
+The within-cluster variance for a cluster $C$ is defined as:
+\[
+\text{Var}(C) = \sum_{i \in C} \|x_i - c_C\|^2,
+\]
+where $c_C$ is the centroid of $C$. When merging clusters $A$ and $B$, the new centroid $c_{A \cup B}$ is:
+\[
+c_{A \cup B} = \frac{|A| \cdot c_A + |B| \cdot c_B}{|A| + |B|}.
+\]
+
+The increase in variance is derived as:
+\[
+\Delta(A, B) = \frac{|A| \cdot |B|}{|A| + |B|} \|c_A - c_B\|^2.
+\]
+
+\textit{Explanation:} The formula ensures that the merging process results in clusters with minimal increases in variance, favoring compact and spherical clusters.
+
+\subsection{Dendrogram}
+A dendrogram is a tree structure representing the hierarchy of cluster merges. It is constructed as follows:
+\begin{enumerate}
+    \item Start with each point as a single cluster.
+    \item At each iteration, merge the two closest clusters and record the dissimilarity at which the merge occurred.
+    \item The height of each merge in the dendrogram represents the dissimilarity between the merged clusters.
+    \item Cutting the dendrogram at a certain height gives the desired number of clusters.
+\end{enumerate}
+
+\subsection{Algorithm Complexity}
+\paragraph{Time Complexity}
+The naive implementation of HAC has a time complexity of:
+\[
+\Theta(N^3),
+\]
+where $N$ is the number of data points. This is because we scan the $N \times N$ distance matrix $N-1$ times.
+
+Optimized implementations using priority queues can reduce the time complexity to:
+\[
+\Theta(N^2 \log N).
+\]
+
+\paragraph{Space Complexity}
+The algorithm requires storing the $N \times N$ distance matrix, resulting in a space complexity of:
+\[
+\Theta(N^2).
+\]
+
+
+\section{K-Means Clustering}
+
+\subsection{Introduction to K-Means}
+K-Means clustering is a partition-based clustering method that divides the dataset into \(k\) distinct non-overlapping subsets. The primary goal is to minimize the total within-cluster variance by iteratively updating cluster assignments and centroids.
+
+\subsubsection{Definition}
+Given a dataset \(X = \{x_1, x_2, \ldots, x_n\}\) with \(n\) data points in a \(d\)-dimensional space, the K-Means algorithm aims to partition \(X\) into \(k\) clusters, \(C = \{C_1, C_2, \ldots, C_k\}\), such that the within-cluster sum of squares (WCSS) is minimized:
+\[
+\min_{C_1, C_2, \ldots, C_k} \sum_{i=1}^k \sum_{x_j \in C_i} \|x_j - \mu_i\|^2,
+\]
+where \(\mu_i\) is the centroid of cluster \(C_i\).
+
+\subsubsection{Algorithm Steps}
+\begin{enumerate}
+    \item \textbf{Initialization:} Randomly select \(k\) initial cluster centroids.
+    \item \textbf{Reassignment:} Assign each data point to the cluster with the nearest centroid based on Euclidean distance.
+    \[
+    C_i = \{x_j : \|x_j - \mu_i\|^2 \leq \|x_j - \mu_l\|^2, \forall l \neq i\}.
+    \]
+    \item \textbf{Re-centering:} Recalculate the centroid of each cluster as the mean of the data points in that cluster:
+    \[
+    \mu_i = \frac{1}{|C_i|} \sum_{x_j \in C_i} x_j.
+    \]
+    \item \textbf{Iteration:} Repeat steps 2 and 3 until convergence, defined as no significant change in centroids or a fixed number of iterations.
+\end{enumerate}
+
+\subsection{Within-Cluster Variation (WCV)}
+The quality of clustering is often measured by the within-cluster variation (WCV), which is defined for a cluster \(C_k\) as:
+\[
+WCV(C_k) = \frac{1}{|C_k|} \sum_{i=1}^{|C_k|} \|x_i - \mu_k\|^2.
+\]
+The goal is to minimize the total WCV across all clusters:
+\[
+\min_{C_1, C_2, \ldots, C_k} \sum_{k=1}^K WCV(C_k).
+\]
+
+However, K-Means typically finds local minima rather than the global minimum.
+
+\subsection{Choosing the Number of Clusters}
+The optimal number of clusters \(k\) can be chosen using the \textbf{elbow method}, which involves plotting the total WCV (inertia) against different values of \(k\). The "elbow point" represents the optimal \(k\), where the rate of decrease in WCV significantly slows down.
+
+\subsection{Silhouette of Clustering}
+The silhouette method evaluates clustering quality by measuring how similar each data point is to its own cluster compared to other clusters. The silhouette coefficient \(s_i\) for a point \(i\) is defined as:
+\[
+s_i = \frac{b_i - a_i}{\max(a_i, b_i)},
+\]
+where:
+\begin{itemize}
+    \item \(a_i\): Average distance between \(i\) and other points in the same cluster.
+    \item \(b_i\): Minimum average distance from \(i\) to points in any other cluster.
+\end{itemize}
+The silhouette coefficient ranges from \(-1\) to \(1\), with higher values indicating better clustering.
+
+\subsubsection{Silhouette Coefficient Derivation}
+\begin{itemize}
+    \item In-cluster distance:
+    \[
+    a_i = \frac{1}{|C_A| - 1} \sum_{j \in C_A, i \neq j} d(i, j).
+    \]
+    \item Between-cluster distance:
+    \[
+    b_i = \min_{B \neq A} \frac{1}{|C_B|} \sum_{j \in C_B} d(i, j).
+    \]
+\end{itemize}
+
+\subsection{Complexity of K-Means}
+\begin{itemize}
+    \item Time complexity: \(O(Nkdi)\), where \(N\) is the number of data points, \(k\) is the number of clusters, \(d\) is the dimensionality, and \(i\) is the number of iterations.
+    \item Space complexity: \(O((N + k)d)\).
+\end{itemize}
+
+\subsection{Limitations of K-Means}
+
+\subsubsection{Dissimilarity}
+\textbf{Cause:}
+K-Means clustering is fundamentally designed for Euclidean space and uses Euclidean distance as the measure of dissimilarity. This assumption makes it less effective when the underlying dataset is better described using other distance metrics.
+
+\textbf{Situations:}
+\begin{itemize}
+    \item \textbf{Non-Euclidean Data:} For datasets where relationships between data points are non-linear or involve categorical data, Euclidean distance fails to capture meaningful dissimilarities.
+    \item \textbf{High-Dimensional Data:} In high-dimensional spaces, distances between points tend to become similar (the curse of dimensionality), reducing the effectiveness of clustering.
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+    \item Use alternative clustering algorithms that support diverse dissimilarity measures, such as DBSCAN or spectral clustering.
+    \item If K-Means is necessary, consider pre-processing the data using dimensionality reduction techniques (e.g., PCA) to focus on the most informative features.
+\end{itemize}
+
+\subsubsection{Cluster Shapes}
+\textbf{Cause:}
+K-Means assumes clusters are spherical and isotropic (equal variance in all directions). This assumption breaks down for irregularly shaped clusters.
+
+\textbf{Situations:}
+\begin{itemize}
+    \item \textbf{Spread-Out Clusters:} When clusters are elongated or have non-linear shapes, K-Means will misclassify points that fall near the decision boundaries.
+    \item \textbf{Nested Clusters:} For clusters with one cluster contained within another (e.g., concentric circles), K-Means fails to identify the nested structure.
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+    \item Use density-based algorithms like DBSCAN that can capture irregularly shaped clusters.
+    \item Kernel K-Means is a modified version of K-Means that uses a kernel function to project data into a higher-dimensional space where clusters are linearly separable.
+\end{itemize}
+
+\subsubsection{Misspecified \(k\) Value}
+\textbf{Cause:}
+K-Means requires the number of clusters \(k\) to be specified beforehand. A wrong choice of \(k\) can lead to overfitting or underfitting.
+
+\textbf{Situations:}
+\begin{itemize}
+    \item \textbf{Overfitting:} Choosing a value of \(k\) larger than the true number of clusters leads to overly fragmented clusters.
+    \item \textbf{Underfitting:} Choosing a value of \(k\) smaller than the true number of clusters merges distinct clusters into one, losing valuable information.
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+    \item Use methods like the elbow method or silhouette analysis to estimate an appropriate value for \(k\).
+    \item Algorithms like Gaussian Mixture Models (GMM) use a probabilistic approach and can determine the number of clusters automatically through model selection criteria (e.g., AIC or BIC).
+\end{itemize}
+
+\subsubsection{Cluster Boundaries}
+\textbf{Cause:}
+K-Means defines cluster boundaries as equidistant hyperplanes between centroids. This rigid boundary definition is problematic when clusters vary in size or density.
+
+\textbf{Situations:}
+\begin{itemize}
+    \item \textbf{Clusters with Different Sizes:} Large, dispersed clusters are not well-separated from smaller, compact clusters.
+    \item \textbf{Clusters with Varying Densities:} Points in dense regions are more likely to be assigned correctly than points in sparse regions near decision boundaries.
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+    \item Switch to clustering algorithms that consider density (e.g., DBSCAN) or hierarchical structure (e.g., Agglomerative Clustering).
+    \item Weight the clustering process to account for cluster size or density variations.
+\end{itemize}
+
+
+\section{DBSCAN: Density-Based Clustering}
+
+\subsection{Introduction to DBSCAN}
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) identifies clusters based on regions densely populated with points, grouping them to form larger clusters. Unlike K-means or hierarchical clustering, DBSCAN can discover clusters of arbitrary shape, making it particularly effective on datasets with non-linear cluster structures.
+
+Key features:
+\begin{itemize}
+    \item Identifies dense regions in data space and joins them to form clusters.
+    \item Labels points not belonging to any cluster as anomalies or noise.
+    \item Effective for datasets with noise or irregular cluster shapes.
+\end{itemize}
+
+\subsection{DBSCAN Parameters}
+DBSCAN requires two key parameters:
+\begin{itemize}
+    \item $\epsilon$ (\textbf{Eps}): The maximum distance for points to be considered neighbors.
+    \item \textbf{MinPts}: The minimum number of points required within an $\epsilon$-neighborhood for a point to qualify as a \textit{core point}.
+\end{itemize}
+
+\textbf{Point Classification:}
+\begin{itemize}
+    \item \textit{Core Points}: Points with at least \textbf{MinPts} neighbors within their $\epsilon$-neighborhood.
+    \item \textit{Border Points}: Points within the $\epsilon$-neighborhood of a core point but not meeting the \textbf{MinPts} criterion.
+    \item \textit{Noise Points}: Points neither core points nor border points.
+\end{itemize}
+
+\subsection{DBSCAN Algorithm}
+The DBSCAN algorithm works as follows:
+\begin{enumerate}
+    \item Arbitrarily select an unvisited point $p$.
+    \item Retrieve all points within the $\epsilon$-neighborhood of $p$ (called \textit{regionQuery}).
+    \item If $p$ is a core point:
+    \begin{itemize}
+        \item Add all points in its $\epsilon$-neighborhood to the same cluster as $p$.
+        \item Recursively apply \textit{regionQuery} to all unvisited neighbors.
+    \end{itemize}
+    \item If $p$ is not a core point, label it as noise (unless it belongs to an existing cluster as a border point).
+    \item Repeat for all unvisited points.
+\end{enumerate}
+
+\subsection{Anomaly Detection in DBSCAN}
+Points that remain unclustered after applying DBSCAN are considered anomalies or noise. These points do not belong to the $\epsilon$-neighborhood of any core point or border point.
+
+\subsection{DBSCAN Algorithm Complexity}
+\begin{itemize}
+    \item \textbf{Naive Implementation:}
+    \begin{itemize}
+        \item \textbf{Time Complexity:} $\mathcal{O}(N^2)$ due to exhaustive pairwise distance computations.
+        \item \textbf{Space Complexity:} $\mathcal{O}(N^2)$ for storing the distance matrix.
+    \end{itemize}
+    \item \textbf{Optimized Implementation:}
+    \begin{itemize}
+        \item \textbf{Time Complexity:} $\mathcal{O}(N \log N)$ with spatial indexing (e.g., R-trees).
+        \item \textbf{Space Complexity:} $\mathcal{O}(N)$ for storing spatial indices.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Density-Connected Points}
+\begin{itemize}
+    \item A point $q$ is \textit{density-reachable} from a point $p$ if $q$ lies within the $\epsilon$-neighborhood of $p$, and $p$ is a core point.
+    \item A point $q$ is \textit{density-connected} to a point $r$ if there exists a point $p$ such that $q$ and $r$ are both density-reachable from $p$.
+\end{itemize}
+
+\subsection{Parameter Selection for DBSCAN}
+\subsubsection{Choosing \textbf{MinPts}}
+\begin{itemize}
+    \item Rule of thumb: $\textbf{MinPts} = 5$ for 2-dimensional data.
+    \item For higher dimensions, use $\textbf{MinPts} = 1 + 2 \times \text{(number of dimensions)}$.
+\end{itemize}
+
+\subsubsection{Choosing $\epsilon$}
+\begin{itemize}
+    \item Plot distances to the $k$th nearest neighbor for all points (with $k = \textbf{MinPts} - 1$).
+    \item Identify the "elbow point" in the plot to select $\epsilon$.
+\end{itemize}
+
+\subsection{HDBSCAN: Hierarchical DBSCAN Algorithm}
+
+HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) improves upon DBSCAN by constructing a hierarchical tree of clusters. The algorithm refines the clustering process by dynamically adjusting density thresholds, resulting in a more flexible clustering solution.
+
+\textbf{Algorithm Steps:}
+\begin{enumerate}
+    \item \textbf{Core Distance Calculation:}
+    \begin{itemize}
+        \item For each data point, compute its \textit{core distance}, which is the distance to the $k$th nearest neighbor, where $k = \textbf{MinPts}$.
+        \item The core distance defines the minimum density required for the point to act as a core point.
+    \end{itemize}
+    
+    \item \textbf{Mutual Reachability Distance:}
+    \begin{itemize}
+        \item For each pair of points $p$ and $q$, compute the \textit{mutual reachability distance}:
+        \[
+        d_{\text{mutual}}(p, q) = \max\{\text{core\_dist}(p), \text{core\_dist}(q), d(p, q)\},
+        \]
+        where $d(p, q)$ is the Euclidean distance between $p$ and $q$.
+        \item This ensures that points with higher densities are more likely to form clusters.
+    \end{itemize}
+    
+    \item \textbf{Construct a Minimum Spanning Tree (MST):}
+    \begin{itemize}
+        \item Create a graph where each point is a node, and edges between nodes are weighted by their mutual reachability distances.
+        \item Use a minimum spanning tree (MST) algorithm (e.g., Prim's or Kruskal's algorithm) to find the tree connecting all points with minimal total weight.
+    \end{itemize}
+    
+    \item \textbf{Cluster Formation:}
+    \begin{itemize}
+        \item Traverse the MST from the root, repeatedly removing edges with large weights to split the tree into smaller subtrees.
+        \item At each level, clusters are formed based on the density thresholds defined by the mutual reachability distances of removed edges.
+    \end{itemize}
+    
+    \item \textbf{Hierarchical Clustering:}
+    \begin{itemize}
+        \item Repeat the clustering process at multiple density levels, creating a hierarchy of clusters.
+        \item Points with lower densities are marked as noise at higher density thresholds.
+    \end{itemize}
+    
+    \item \textbf{Optimal Cluster Selection:}
+    \begin{itemize}
+        \item Evaluate clusters at different hierarchy levels using metrics such as the silhouette coefficient or the cluster stability score.
+        \item Select the level that best represents the underlying structure of the data.
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Advantages of HDBSCAN:}
+\begin{itemize}
+    \item \textbf{Flexibility:} Automatically determines the optimal number of clusters.
+    \item \textbf{Noise Handling:} Effectively separates noise from meaningful clusters.
+    \item \textbf{Scalability:} Handles large datasets with varying densities.
+    \item \textbf{Robustness:} Reduces reliance on strict parameter tuning.
+\end{itemize}
+
+
+
+
+\end{document}
