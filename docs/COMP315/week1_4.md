@@ -4,10 +4,10 @@
 
 ### Computer resource
 
-<img src="img/image-20250518022924011.png" alt="image-20250518022924011"  />
+![image-20250518022924011](/img/image-20250518022924011.png)
 
 - 就像个人电脑一样，服务器也有 CPU、内存、硬盘、网卡等组件，但它们没有显示器、键盘或鼠标。
-- 服务器通常安装在机架上，并连接到一个网络交换机。这个交换机安装在机架顶部，被称为“顶层交换机”（top of rack switch）。
+- 服务器通常安装在机架上，并连接到一个网络交换机。这个交换机安装在机架顶部，被称为"顶层交换机"（top of rack switch）。
   - 顶层交换机用于将每台服务器与同一个机架内的其他服务器连接起来。
   - 它还将服务器连接到数据中心的网络中。
 - 硬盘可以直接放置在服务器上，也可以通过数据中心的网络进行访问。
@@ -16,7 +16,7 @@
 
 ##  Local Networks vs. The Internet
 
-<img src="img/image-20250518022942327.png" alt="image-20250518022942327"  />
+![image-20250518022942327](/img/image-20250518022942327.png)
 
 #### 局域网（LAN）
 
@@ -31,13 +31,13 @@
 
 ###  Network Interface Cards
 
-<img src="img/image-20250518023009992.png" alt="image-20250518023009992"  />
+![image-20250518023009992](/img/image-20250518023009992.png)
 
 ### MAC Address
 
-<img src="img/image-20250516214243188.png" alt="image-20250516214243188"  />
+![image-20250516214243188](/img/image-20250516214243188.png)
 
-<img src="img/image-20250516214437783.png" alt="image-20250516214437783"  />
+![image-20250516214437783](/img/image-20250516214437783.png)
 
 ### Network Switches
 
@@ -65,7 +65,7 @@ They work by **examining each packet of data** to determine whether it should be
 
 ## Question 1
 
-<img src="img/image-20250516215219263.png" alt="image-20250516215219263"  />
+![image-20250516215219263](/img/image-20250516215219263.png)
 
 - Commodity hardware is **inexpensive, widely available**, and **easy to replace with standard off-the-shelf components**.
 
@@ -73,7 +73,7 @@ They work by **examining each packet of data** to determine whether it should be
 
 ## Question 2 ( top-of-rack)
 
-<img src="img/image-20250516215411280.png" alt="image-20250516215411280"  />
+![image-20250516215411280](/img/image-20250516215411280.png)
 
 - The top-of-rack switch provides **local connectivity** for servers within the rack and also c**onnects them to the wider data center network**.
 
@@ -83,17 +83,17 @@ They work by **examining each packet of data** to determine whether it should be
 
 ### Operating System
 
-<img src="img/image-20250516215824479.png" alt="image-20250516215824479"  />
+![image-20250516215824479](/img/image-20250516215824479.png)
 
 ### Linux
 
-<img src="img/image-20250516215925456.png" alt="image-20250516215925456"  />
+![image-20250516215925456](/img/image-20250516215925456.png)
 
 
 
 ### The Linux kernel
 
-<img src="img/image-20250516220043957.png" alt="image-20250516220043957"  />
+![image-20250516220043957](/img/image-20250516220043957.png)
 
 **Kernel Space**: This is where the kernel operates Code running in kernel space has complete access to the hardware. Code is run in a **protected memory area**, ensuring stability and security. 
 
@@ -120,22 +120,22 @@ The root user is a special user account that has **the highest privileges** in t
 
 **Hypervisor**: A software layer runs on **a physical server** and enables **the creation and management of a number of virtual machines**.
 
-<img src="img/image-20250516221918934.png" alt="image-20250516221918934"  />
+![image-20250516221918934](/img/image-20250516221918934.png)
 
-<img src="img/image-20250516221956315.png" alt="image-20250516221956315"  />
+![image-20250516221956315](/img/image-20250516221956315.png)
 
 **Benefits**:
 
 - **Efficiency**: Maximises resource utilisation. 
 - **Cost Savings**: Reduces the need for **physical hardware**. 
 - **Flexibility**: **Eases the deployment and management** of IT environments. 
-- **Isolation**: To some extent, provides **secure and isolated environments for different applications**. (Although more robust isolation can be achieved with sandbox solutions such as SELinux, as we’ll see later in the course.)
+- **Isolation**: To some extent, provides **secure and isolated environments for different applications**. (Although more robust isolation can be achieved with sandbox solutions such as SELinux, as we'll see later in the course.)
 
 
 
 ## Question 1  (Linus Kernel)
 
-<img src="img/image-20250516222428251.png" alt="image-20250516222428251"  />
+![image-20250516222428251](/img/image-20250516222428251.png)
 
  The kernel provides services by **managing processes, memory, and devices**, **exposing this functionality through system calls**.
 
@@ -143,7 +143,7 @@ The root user is a special user account that has **the highest privileges** in t
 
  ## Question 2 (visualization)
 
-<img src="img/image-20250516222620302.png" alt="image-20250516222620302"  />
+![image-20250516222620302](/img/image-20250516222620302.png)
 
 **Type 1** (bare-metal) hypervisors run directly on the host hardware; they usually have lower overhead than **Type 2** (hosted) hypervisors.
 
@@ -151,7 +151,7 @@ The root user is a special user account that has **the highest privileges** in t
 
 ## HTML, CSS and JavaScript
 
-- HTML(Hyper Text Markup Language) is the **standard markup language** for creating **web pages**. It describes the **structure of a web page** and it’s used along with CSS to design the layout of the web page. 
+- HTML(Hyper Text Markup Language) is the **standard markup language** for creating **web pages**. It describes the **structure of a web page** and it's used along with CSS to design the layout of the web page. 
 - CSS (Cascading Style Sheets) is **a style sheet language** used for describing **the look and formatting** of a document written in HTML. It provides the visual aspects of the web page that HTML is not designed to do. 
 - JavaScript is an **object oriented programming language**. It is supported by **all web browsers**, and can be used to program **how web pages behave in response to user interaction**.
 
@@ -175,27 +175,27 @@ Markup: A system for annotating text in documents. 注释文本
 
 The DOM(Document Object Model) is **a programming interface for web documents**. 
 
-It represents the structure of a document **as a tree**, and allows programs to **manipulate the document’s structure, style, and content**. 
+It represents the structure of a document **as a tree**, and allows programs to **manipulate the document's structure, style, and content**. 
 
-The DOMis initially populated from the page’s HTML. HTML tags become nodes in the tree, and these nodes can be manipulated using JavaScript. 
+The DOMis initially populated from the page's HTML. HTML tags become nodes in the tree, and these nodes can be manipulated using JavaScript. 
 
-Once populated, the DOM can be manipulated with JavaScript, allowing JavaScript programmers to **change the web page in response to users’ actions** (e.g users clicking buttons etc.)
+Once populated, the DOM can be manipulated with JavaScript, allowing JavaScript programmers to **change the web page in response to users' actions** (e.g users clicking buttons etc.)
 
 
 
-<img src="img/image-20250516224611454.png" alt="image-20250516224611454"  />
+![image-20250516224611454](/img/image-20250516224611454.png)
 
 ### CSS
 
 改样式的
 
-<img src="img/image-20250516224658141.png" alt="image-20250516224658141"  />
+![image-20250516224658141](/img/image-20250516224658141.png)
 
 
 
 How to link?
 
-<img src="img/image-20250516224848644.png" alt="image-20250516224848644"  />
+![image-20250516224848644](/img/image-20250516224848644.png)
 
 ### HTML Element Attributes
 
@@ -209,17 +209,17 @@ style: Specifies inline CSS style for an element.
 
 有些样式自己可以不写，用这个东西
 
-<img src="img/image-20250516225348568.png" alt="image-20250516225348568"  />
+![image-20250516225348568](/img/image-20250516225348568.png)
 
 ### JavaScript
 
-<img src="img/image-20250516225457882.png" alt="image-20250516225457882"  />
+![image-20250516225457882](/img/image-20250516225457882.png)
 
 
 
 ## Question 5 (DOM)
 
-<img src="img/image-20250516225604652.png" alt="image-20250516225604652"  />
+![image-20250516225604652](/img/image-20250516225604652.png)
 
 The DOMis **a dynamic tree-like structure** generated from the HTML document.
 
@@ -227,15 +227,15 @@ The DOMis **a dynamic tree-like structure** generated from the HTML document.
 
 ## Question 1 (HTML)
 
-<img src="img/image-20250516225725799.png" alt="image-20250516225725799"  />
+![image-20250516225725799](/img/image-20250516225725799.png)
 
-<img src="img/image-20250516225928610.png" alt="image-20250516225928610"  />
+![image-20250516225928610](/img/image-20250516225928610.png)
 
 ## Question 4(HTML CSS JavaScript)
 
-<img src="img/image-20250516230238100.png" alt="image-20250516230238100"  />
+![image-20250516230238100](/img/image-20250516230238100.png)
 
-<img src="img/image-20250516230331373.png" alt="image-20250516230331373"  />
+![image-20250516230331373](/img/image-20250516230331373.png)
 
 
 
@@ -247,7 +247,7 @@ P98  很简单
 
 
 
-<img src="img/image-20250516230614304.png" alt="image-20250516230614304"  />
+![image-20250516230614304](/img/image-20250516230614304.png)
 
 - **Let：** `let` 关键字用于声明变量。它具有块级作用域，意味着变量仅在声明它的代码块内有效。
   - `let` 声明的变量可以被更新，但不能被重复声明。
@@ -262,11 +262,11 @@ P98  很简单
 
 
 
-<img src="img/image-20250516231308233.png" alt="image-20250516231308233"  />
+![image-20250516231308233](/img/image-20250516231308233.png)
 
 
 
-- **Truthiness（真假性）：** 在 JavaScript 中，一个值在布尔上下文中表现为 “真” 或 “假”，比如在 if 语句中使用时的行为。
+- **Truthiness（真假性）：** 在 JavaScript 中，一个值在布尔上下文中表现为 "真" 或 "假"，比如在 if 语句中使用时的行为。
 
 - **Truthy 值：** 在布尔上下文中被视为 `true`。除非被明确定义为 falsy，大多数值都属于 truthy。
   - 例如：`{}`, `[]`, `42`, `"false"`, `new Date()`, `-42`, `3.14`, `-3.14`, `Infinity`, `-Infinity`，所有对象。
@@ -276,7 +276,7 @@ P98  很简单
 
 
 
-<img src="img/image-20250516231658591.png" alt="image-20250516231658591"  />
+![image-20250516231658591](/img/image-20250516231658591.png)
 
 - **双等号（==）：** 双等号运算符会在比较的两个变量类型不同的情况下进行类型转换（类型强制转换）。
   - 示例：`1 == "1"`  // 输出：`true`
@@ -288,31 +288,31 @@ P98  很简单
 
 ### Array P110
 
-<img src="img/image-20250516232157433.png" alt="image-20250516232157433"  />
+![image-20250516232157433](/img/image-20250516232157433.png)
 
-<img src="img/image-20250516232340456.png" alt="image-20250516232340456"  />
+![image-20250516232340456](/img/image-20250516232340456.png)
 
 ### Object
 
-<img src="img/image-20250516232427652.png" alt="image-20250516232427652"  />
+![image-20250516232427652](/img/image-20250516232427652.png)
 
 ## Question 1 (JavaScript)
 
-<img src="img/image-20250517002714651.png" alt="image-20250517002714651"  />
+![image-20250517002714651](/img/image-20250517002714651.png)
 
-<img src="img/image-20250517002801070.png" alt="image-20250517002801070"  />
+![image-20250517002801070](/img/image-20250517002801070.png)
 
 ## Question 2 (JavaScript)
 
-<img src="img/image-20250517003009457.png" alt="image-20250517003009457"  />
+![image-20250517003009457](/img/image-20250517003009457.png)
 
-<img src="img/image-20250517003127855.png" alt="image-20250517003127855"  />
+![image-20250517003127855](/img/image-20250517003127855.png)
 
 ## Question 3 (JavaScript)
 
-<img src="img/image-20250517003329545.png" alt="image-20250517003329545"  />
+![image-20250517003329545](/img/image-20250517003329545.png)
 
-<img src="img/image-20250517003345570.png" alt="image-20250517003345570"  />
+![image-20250517003345570](/img/image-20250517003345570.png)
 
 
 
@@ -332,7 +332,7 @@ P98  很简单
 
 ### The Principle of Least Privilege
 
-<img src="img/image-20250517004304829.png" alt="image-20250517004304829"  />
+![image-20250517004304829](/img/image-20250517004304829.png)
 
 - **最小权限原则（PoLP, Principle of Least Privilege）** 是计算机安全中的一个重要概念，对于减少零日攻击的影响非常关键。
 
@@ -362,7 +362,7 @@ P98  很简单
 
 ### Discretionary Access Control
 
-<img src="img/image-20250517213501305.png" alt="image-20250517213501305"  />
+![image-20250517213501305](/img/image-20250517213501305.png)
 
 - 默认情况下，Linux 使用**自主访问控制（DAC, Discretionary Access Control）**，即程序运行时会继承执行该程序用户的权限。
 - 这些权限是由用户或其他用户根据自主决定设置的。
@@ -373,7 +373,7 @@ P98  很简单
 
 ### Privilege Escalation
 
-<img src="img/image-20250517214104647.png" alt="image-20250517214104647"  />
+![image-20250517214104647](/img/image-20250517214104647.png)
 
 - 在 DAC 设置中，root 用户与非 root 用户的隔离机制为防止程序被攻破提供了一定程度的保护。
 
@@ -387,13 +387,13 @@ P98  很简单
 
 ###  File Permissions in Linux
 
-<img src="img/image-20250517214435965.png" alt="image-20250517214435965"  />
+![image-20250517214435965](/img/image-20250517214435965.png)
 
-<img src="img/image-20250517214633536.png" alt="image-20250517214633536"  />
+![image-20250517214633536](/img/image-20250517214633536.png)
 
 ### Discretionary Access Control in Linux (chmod, sudo, superuser)
 
-<img src="img/image-20250517214838604.png" alt="image-20250517214838604"  />
+![image-20250517214838604](/img/image-20250517214838604.png)
 
 ### Mandatory Access Control (MAC)
 
@@ -407,13 +407,13 @@ P98  很简单
 
 ### SELinux Modes
 
-<img src="img/image-20250517222652763.png" alt="image-20250517222652763"  />
+![image-20250517222652763](/img/image-20250517222652763.png)
 
 
 
 ### Labelling in SELinux
 
-<img src="img/image-20250517222923324.png" alt="image-20250517222923324"  />
+![image-20250517222923324](/img/image-20250517222923324.png)
 
 ### Type enforcement example
 
@@ -425,23 +425,23 @@ Week 4 P 180
 
 - **多级安全机制（Multi Level Security, MLS）** 是 SELinux 提供的另一项安全机制。
 
-- 其核心概念是：根据数据的安全等级来控制进程的访问权限。例如，一个拥有 “机密（secret）” 级别权限的进程，无法访问 “绝密（top-secret）” 的数据。
+- 其核心概念是：根据数据的安全等级来控制进程的访问权限。例如，一个拥有 "机密（secret）" 级别权限的进程，无法访问 "绝密（top-secret）" 的数据。
 
 - 类比来说，这就像不再区分不同的狗，而是区分狗的品种，比如灵缇犬（Greyhound）和吉娃娃（Chihuahua）。
 
 
 
-<img src="img/image-20250517225915138.png" alt="image-20250517225915138"  />
+![image-20250517225915138](/img/image-20250517225915138.png)
 
 ###  MLSPolicy in Action
 
-<img src="img/image-20250517230006175.png" alt="image-20250517230006175"  />
+![image-20250517230006175](/img/image-20250517230006175.png)
 
-<img src="img/image-20250517230133737.png" alt="image-20250517230133737"  />
+![image-20250517230133737](/img/image-20250517230133737.png)
 
 ### MLSand Type Enforcement
 
-<img src="img/image-20250517230230784.png" alt="image-20250517230230784"  />
+![image-20250517230230784](/img/image-20250517230230784.png)
 
 ## Containers
 
@@ -449,11 +449,11 @@ Containers are **a lightweight alternative** to **virtual machines**, which star
 
 
 
-<img src="img/image-20250517230530201.png" alt="image-20250517230530201"  />
+![image-20250517230530201](/img/image-20250517230530201.png)
 
 - 容器的设计目的是封装应用程序及其依赖项，并运行在宿主操作系统内核之上。
 
-- 从应用程序的角度来看，容器像是虚拟机，但实际上它们更加轻量——在容器“内部”运行的代码，其实就是在宿主操作系统上运行，并通过某些技术手段与宿主系统其他部分隔离开来。
+- 从应用程序的角度来看，容器像是虚拟机，但实际上它们更加轻量——在容器"内部"运行的代码，其实就是在宿主操作系统上运行，并通过某些技术手段与宿主系统其他部分隔离开来。
 
 - 容器的轻量特性彻底改变了云计算的发展方向，它们是现代云软件架构的核心组成部分。
 
@@ -463,11 +463,11 @@ Containers are **a lightweight alternative** to **virtual machines**, which star
 
 ### Tech Stack for Containers
 
-<img src="img/image-20250517230704343.png" alt="image-20250517230704343"  />
+![image-20250517230704343](/img/image-20250517230704343.png)
 
 ### Containers+Virtualisation
 
-<img src="img/image-20250517230731286.png" alt="image-20250517230731286"  />
+![image-20250517230731286](/img/image-20250517230731286.png)
 
 
 
@@ -494,11 +494,11 @@ docker run -it ubuntu:latest /bin/bash
 
 #### Example
 
-<img src="img/image-20250517231606725.png" alt="image-20250517231606725"  />
+![image-20250517231606725](/img/image-20250517231606725.png)
 
 ### Running docker
 
-<img src="img/image-20250517231635387.png" alt="image-20250517231635387"  />
+![image-20250517231635387](/img/image-20250517231635387.png)
 
 ### Dockerfile Elements
 
@@ -516,17 +516,17 @@ docker run -it ubuntu:latest /bin/bash
 
 
 
-<img src="img/image-20250517232414188.png" alt="image-20250517232414188"  />
+![image-20250517232414188](/img/image-20250517232414188.png)
 
 
 
-<img src="img/image-20250517232303411.png" alt="image-20250517232303411"  />
+![image-20250517232303411](/img/image-20250517232303411.png)
 
 
 
 ### Creating container
 
-<img src="img/image-20250517232634599.png" alt="image-20250517232634599"  />
+![image-20250517232634599](/img/image-20250517232634599.png)
 
 ### Namespaces
 
@@ -548,7 +548,7 @@ docker run -it ubuntu:latest /bin/bash
 
 ### Control Groups (cgroups)
 
-<img src="img/image-20250517234250388.png" alt="image-20250517234250388"  />
+![image-20250517234250388](/img/image-20250517234250388.png)
 
 
 
@@ -577,7 +577,7 @@ docker run -it ubuntu:latest /bin/bash
 
 ###  Orchestration (管弦乐？？？)
 
-<img src="img/image-20250517235134871.png" alt="image-20250517235134871"  />
+![image-20250517235134871](/img/image-20250517235134871.png)
 
 - 编排软件（Orchestration software）运行在数据中心硬件之上，并提供以下功能：
 
@@ -616,7 +616,7 @@ P221
 
 ### CRI and OCI
 
-<img src="img/image-20250518001342727.png" alt="image-20250518001342727"  />
+![image-20250518001342727](/img/image-20250518001342727.png)
 
 ### Microservices and Monoliths
 
@@ -630,7 +630,7 @@ P221
 
 - 每个容器运行一个单一服务，整个应用由多个服务组成。
 
-- 由于容器部署非常方便，它们可以将某些小的功能部分作为 **服务（services）** 提供（因此称为“微服务”）。
+- 由于容器部署非常方便，它们可以将某些小的功能部分作为 **服务（services）** 提供（因此称为"微服务"）。
 
 - 这种做法替代了传统方式——过去的应用程序常常被打包成一个 **单体（monolith）**：
   - 即：将整个应用的代码打成一个大包，彼此紧密交织，常常包含数百万行代码。
@@ -643,8 +643,8 @@ P221
 
 ### Protocols and Protocol Stacks
 
--  it’s all made possible by **a set of protocols** that **run between the hardware components** along **the route between your computer and the web server**.
--  A protocol is **the equivalent of a conversation between two machines**. It’s a set of rules that define how two machines should interact and exchange information.
+-  it's all made possible by **a set of protocols** that **run between the hardware components** along **the route between your computer and the web server**.
+-  A protocol is **the equivalent of a conversation between two machines**. It's a set of rules that define how two machines should interact and exchange information.
 - Networking protocols are organised into stacks, where **the lowest levels in a stack provide basic services**, such as **transmission of bits over physical cables (通过物理电缆传播比特)**, or relaying small packets of data across local networks.
 -  These low level protocols are then used by higher level protocols to provide more complex services, such as reliable delivery of data across continents, and secure communication.
 
@@ -664,12 +664,13 @@ P221
 
 ## The OSI model
 
-| <img src="img/image-20250518002402160.png" alt="image-20250518002402160"  /> | <img src="img/image-20250518002431073.png" alt="image-20250518002431073"  /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+![image-20250518002402160](/img/image-20250518002402160.png)
+
+![image-20250518002431073](/img/image-20250518002431073.png)
 
 ### The OSI Model vs The TCP/IP Stack
 
-<img src="img/image-20250518002737676.png" alt="image-20250518002737676"  />
+![image-20250518002737676](/img/image-20250518002737676.png)
 
 ###  3 Types of Address
 
@@ -677,13 +678,13 @@ protocal stacks 用地址来communicate
 
 
 
-<img src="img/image-20250518003045740.png" alt="image-20250518003045740"  />
+![image-20250518003045740](/img/image-20250518003045740.png)
 
 
 
 ### Layer 1: Physical Layer
 
-<img src="img/image-20250518003542427.png" alt="image-20250518003542427"  />
+![image-20250518003542427](/img/image-20250518003542427.png)
 
 
 
@@ -703,13 +704,13 @@ protocal stacks 用地址来communicate
 
 ### Ethernet Frames
 
-<img src="img/image-20250518004057927.png" alt="image-20250518004057927"  />
+![image-20250518004057927](/img/image-20250518004057927.png)
 
 
 
 ###  MACAddress Refresher
 
-<img src="img/image-20250518004233848.png" alt="image-20250518004233848"  />
+![image-20250518004233848](/img/image-20250518004233848.png)
 
 
 
@@ -751,19 +752,19 @@ protocal stacks 用地址来communicate
 
 **two versions**:
 
-<img src="img/image-20250518004739282.png" alt="image-20250518004739282"  />
+![image-20250518004739282](/img/image-20250518004739282.png)
 
 
 
 ###  IPv4 Address Format
 
-![image-20250518005006007](img/image-20250518005006007.png)
+![image-20250518005006007](/img/image-20250518005006007.png)
 
 
 
 ###  IPv6 Address Format
 
-<img src="img/image-20250518005205211.png" alt="image-20250518005205211"  />
+![image-20250518005205211](/img/image-20250518005205211.png)
 
 
 
@@ -802,7 +803,7 @@ protocal stacks 用地址来communicate
 
 ### Port number
 
-<img src="img/image-20250518005750689.png" alt="image-20250518005750689"  />
+![image-20250518005750689](/img/image-20250518005750689.png)
 
 
 
@@ -854,7 +855,7 @@ protocal stacks 用地址来communicate
 
 ### Certificate Authorities
 
-<img src="img/image-20250518010551836.png" alt="image-20250518010551836"  />
+![image-20250518010551836](/img/image-20250518010551836.png)
 
 
 
@@ -880,7 +881,7 @@ protocal stacks 用地址来communicate
 
 - 此层确保一个系统应用层发送的数据，能被另一个系统的应用层正确识别与读取。
 
-- 你可以把它理解为网络中的“翻译器”或“格式整理者”。
+- 你可以把它理解为网络中的"翻译器"或"格式整理者"。
 
 
 
@@ -896,13 +897,13 @@ protocal stacks 用地址来communicate
 
 ###  HTTP and HTTPS
 
-- **HTTP** 代表“超文本传输协议（Hypertext Transfer Protocol）”。
+- **HTTP** 代表"超文本传输协议（Hypertext Transfer Protocol）"。
 
 - HTTP 是一个**应用层协议**（第七层），它需要一个底层且可靠的传输层协议，通常使用 **TCP**。
 
 - 然而，HTTP 也可以适配不可靠的协议，比如 **UDP**。
 
-- **HTTPS** 末尾的 “S” 代表 “**Secure**”，意思是：你与网站之间的通信是加密的。
+- **HTTPS** 末尾的 "S" 代表 "**Secure**"，意思是：你与网站之间的通信是加密的。
 
 - HTTPS 在 HTTP 的基础上，额外使用了**传输层安全协议（TLS）**，或其前身 **SSL（安全套接字层）**，以实现安全通信。
 
@@ -928,59 +929,59 @@ protocal stacks 用地址来communicate
 
 ## Question 1 (Networking)
 
-<img src="img/image-20250518011759495.png" alt="image-20250518011759495"  />
+![image-20250518011759495](/img/image-20250518011759495.png)
 
 
 
 ## Question 2(Networking)
 
-<img src="img/image-20250518011855996.png" alt="image-20250518011855996"  />
+![image-20250518011855996](/img/image-20250518011855996.png)
 
 
 
 ## Question 3(Networking)
 
-<img src="img/image-20250518011956694.png" alt="image-20250518011956694"  />
+![image-20250518011956694](/img/image-20250518011956694.png)
 
 ## Question 4(Networking)
 
-<img src="img/image-20250518012049517.png" alt="image-20250518012049517"  />
+![image-20250518012049517](/img/image-20250518012049517.png)
 
 
 
 ## Question 5(Networking)
 
-<img src="img/image-20250518012156688.png" alt="image-20250518012156688"  />
+![image-20250518012156688](/img/image-20250518012156688.png)
 
 
 
 ## Question 6(Networking)
 
-<img src="img/image-20250518012251668.png" alt="image-20250518012251668"  />
+![image-20250518012251668](/img/image-20250518012251668.png)
 
 
 
 ## Question 7(Networking)
 
-<img src="img/image-20250518012333773.png" alt="image-20250518012333773"  />
+![image-20250518012333773](/img/image-20250518012333773.png)
 
 
 
 ## Question 8(Networking)
 
-<img src="img/image-20250518012428218.png" alt="image-20250518012428218"  />
+![image-20250518012428218](/img/image-20250518012428218.png)
 
 
 
 ## Ansible I
 
-<img src="img/image-20250518012607217.png" alt="image-20250518012607217"  />
+![image-20250518012607217](/img/image-20250518012607217.png)
 
 
 
 ### Agentless Architecture
 
-<img src="img/image-20250518012727916.png" alt="image-20250518012727916"  />
+![image-20250518012727916](/img/image-20250518012727916.png)
 
 
 
@@ -1005,7 +1006,7 @@ protocal stacks 用地址来communicate
 
 ###  Agentless Architecture II
 
-<img src="img/image-20250518013147761.png" alt="image-20250518013147761"  />
+![image-20250518013147761](/img/image-20250518013147761.png)
 
 
 
@@ -1045,7 +1046,7 @@ protocal stacks 用地址来communicate
 
 ###  Playbooks and Idempotency
 
-- 在 **Ansible** 中，我们通过 **Playbook** 指定系统的“理想状态”。
+- 在 **Ansible** 中，我们通过 **Playbook** 指定系统的"理想状态"。
 
 - 一个重要特性：**幂等性（idempotent）**
   - 意思是：只有在必要时才做出更改。
@@ -1063,25 +1064,19 @@ protocal stacks 用地址来communicate
 
 ### Inventory Files
 
-<img src="img/image-20250518014211913.png" alt="image-20250518014211913"  />
+![image-20250518014211913](/img/image-20250518014211913.png)
 
+![image-20250518014242044](/img/image-20250518014242044.png)
 
+![image-20250518014412469](/img/image-20250518014412469.png)
 
+![image-20250518014724280](/img/image-20250518014724280.png)
 
-
-| <img src="img/image-20250518014242044.png" alt="image-20250518014242044"  /> | <img src="img/image-20250518014412469.png" alt="image-20250518014412469"  /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-
-
-
-| <img src="img/image-20250518014724280.png" alt="image-20250518014724280"  /> | <img src="img/image-20250518014736460.png" alt="image-20250518014736460"  /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-
-
+![image-20250518014736460](/img/image-20250518014736460.png)
 
 ### Ansible Command Line Tool
 
-<img src="img/image-20250518015008302.png" alt="image-20250518015008302"  />
+![image-20250518015008302](/img/image-20250518015008302.png)
 
 
 
@@ -1091,7 +1086,7 @@ protocal stacks 用地址来communicate
 
 ### Playbooks
 
-<img src="img/image-20250518015425822.png" alt="image-20250518015425822"  />
+![image-20250518015425822](/img/image-20250518015425822.png)
 
 
 
@@ -1153,7 +1148,7 @@ tasks:
 
 ###  Modules
 
-<img src="img/image-20250518020207407.png" alt="image-20250518020207407"  />
+![image-20250518020207407](/img/image-20250518020207407.png)
 
 
 
@@ -1161,158 +1156,4 @@ tasks:
 
 - `become` 允许任务以 root 权限运行，相当于 `sudo`。
 
-- `become: yes` 可以写在：
-
-  - playbook 层：作用于所有任务
-
-  - task 层：作用于单个任务
-
-```
-- name: Install Apache on all hosts
-  hosts: all
-  become: yes
-  tasks:
-    - name: Install the latest version of Apache
-      ansible.builtin.dnf:
-        name: httpd
-        state: latest
-```
-
-
-
-###  When
-
-- Ansible 支持使用条件语句（`when`）来控制任务是否执行。
-
-- 最简单的条件语句应用于单个任务：
-
-```
-when: ansible_selinux.status == "enabled"
-```
-
-- `when` 子句是**原始模板表达式**，**不需要双花括号 `{{ }}`**。
-
-- 当运行 playbook 时，Ansible 会在所有主机上评估这个测试表达式：
-
-  - 如果表达式为 `True`，则任务会执行；
-
-  - 如果为 `False`，任务不会执行。
-
-
-
-
-
-```
-tasks:
-  - name: Configure SELinux to start mysql on any port
-    ansible.posix.seboolean:
-      name: mysql_connect_any
-      state: true
-      persistent: true
-    when: ansible_selinux.status == "enabled"
-```
-
-- **`ansible.posix.seboolean`**：用于设置 SELinux 布尔值；
-- **`when`**：判断条件，仅当 SELinux 状态为 `"enabled"` 时才运行此任务。
-
-
-
-- 所有变量在 `when` 中都可以**直接使用**，无需双大括号；
-- 多用于根据主机不同状态（如系统、服务启用状态）做出差异化部署。
-
-
-
-### Register
-
-```
-- hosts: web_servers
-  tasks:
-    - name: Run a shell command and register its output
-      ansible.builtin.shell: /usr/bin/foo
-      register: foo_result
-      ignore_errors: true
-
-    - name: Run a shell command using output of foo
-      ansible.builtin.shell: /usr/bin/bar
-      when: foo_result.rc == 5
-```
-
-- `register:` 用于将任务的输出结果保存为变量。
-- 上面的示例中，`foo_result` 会保存 `/usr/bin/foo` 命令的返回结果。
-- `when:` 用于条件判断，只有当 `foo_result.rc == 5` 时才执行 `/usr/bin/bar`。
-
-
-
-```
-- name: Ping all hosts
-  hosts: all
-  tasks:
-    - name: Check connectivity
-      ping:
-      register: ping_result
-
-    - name: Debug the ping result
-      debug:
-        msg: "debug says: {{ ping_result }}"
-```
-
-- `register:` 用于将 `ping` 任务的输出保存到变量 `ping_result` 中。
-- `msg: "debug says: {{ ping_result }}"` 会打印一条消息，内容为 `"debug says: "` 加上 `ping_result` 的内容。
-- `{{ ... }}` 是变量插值语法，用来把变量或表达式的值插入到字符串中。
-
-
-
-
-
-### Using Register and Debug in Ansible
-
-```
-- name: Ping all hosts  
-  hosts: all  
-  tasks:  
-    - name: Check connectivity  
-      ping:  
-      register: ping_result  
-
-    - name: Debug the ping result  
-      debug:  
-        msg: "debug says: {{ ping_result }}"  
-```
-
-- `register:` 用于将 `ping` 任务的输出结果保存到变量 `ping_result` 中。
-- `msg: "debug says: {{ ping_result }}"` 表示打印一条消息，内容是 `debug says:` 加上变量 `ping_result` 的值。
-- `{{ ... }}` 是变量插值语法，用于将变量或表达式的值插入字符串中。
-
-
-
-
-
-### Loops
-
-````
-```yaml
-tasks:
-  - name: Check connectivity
-    ping:
-    loop: "{{ range(1, 4) | list }}"
-    loop_control:
-      label: "Ping number {{ item }}"
-```
-````
-
-
-
-- 这个 Ansible playbook 会对所有主机执行三次 ping 操作：
-- `loop` 指令用于重复执行 ping 任务。`range(1, 4)` 生成 `[1, 2, 3]`，所以循环执行三次。
-- `| list`：将 range 生成的对象转换为列表，使其可以被迭代。
-- `loop_control`：用于自定义循环行为。`label` 参数会为每次循环指定标签。
-- `label: "Ping number {{ item }}"`：指定每次循环显示的标签，其中 `item` 是当前循环的值。
-
-
-
-### Running examples
-
-P309-316
-
-
-
+- `
